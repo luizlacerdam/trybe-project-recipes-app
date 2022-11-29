@@ -28,7 +28,7 @@ function Login(props) {
         <label htmlFor="input__password">
           <input
             data-testid="password-input"
-            type="text"
+            type="password"
             name="password"
             id="input__password"
             placeholder="password"
