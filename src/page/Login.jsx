@@ -1,6 +1,17 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { saveUser } from '../redux/actions';
 
-function Login() {
+function Login(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleClick = () => {
+    const { dispatch } = props;
+    dispatch(saveUser({ email, password }));
+  };
+
   return (
     <div>
       <form action="">
@@ -10,11 +21,34 @@ function Login() {
             type="text"
             name="email"
             id="input__email"
+            placeholder="Email"
+            onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
+        <label htmlFor="input__password">
+          <input
+            data-testid="password-input"
+            type="text"
+            name="password"
+            id="input__password"
+            placeholder="password"
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+        </label>
+        <button
+          data-testid="login-submit-btn"
+          type="button"
+          onClick={ handleClick }
+        >
+          login
+        </button>
       </form>
     </div>
   );
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Login);
