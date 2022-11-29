@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { saveUser } from '../redux/actions';
+import saveEmailLocalStorage from '../services/LocalStorage';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ function Login(props) {
   const handleClick = () => {
     const { dispatch } = props;
     dispatch(saveUser({ email, password }));
+    saveEmailLocalStorage({ email });
   };
 
   const validateEmail = () => {
