@@ -40,7 +40,7 @@ function Login(props) {
           type="button"
           onClick={ handleClick }
         >
-          login
+          Enter
         </button>
       </form>
     </div>
