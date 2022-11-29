@@ -46,7 +46,6 @@ function Login(props) {
     </div>
   );
 }
-
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
