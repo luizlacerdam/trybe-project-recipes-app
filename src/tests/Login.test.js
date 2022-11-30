@@ -55,7 +55,6 @@ describe('Testa a página de Login.', () => {
       expect(screen.getByTestId(buttonId)).toBeDisabled();
       userEvent.type(screen.getByTestId(passInput), password);
       expect(screen.getByTestId(buttonId)).toBeEnabled();
-      console.log(screen.getByTestId(buttonId));
       userEvent.click(screen.getByTestId(buttonId));
       const { location: { pathname } } = history;
       expect(pathname).toBe('/meals');
