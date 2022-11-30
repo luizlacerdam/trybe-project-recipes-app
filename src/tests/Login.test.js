@@ -38,23 +38,24 @@ describe('Testa a página de Login.', () => {
       renderWithRouterAndRedux(<Login />);
       expect(screen.getByTestId(buttonId)).toBeInTheDocument();
       expect(screen.getByTestId(buttonId)).toHaveTextContent('Enter');
-      expect(screen.getByRole('button', { name: 'Enter' })).toBeEnabled();
+      expect(screen.getByTestId(buttonId)).toBeDisabled();
     });
     test('3.2. Testa se o button não esta disabled.', () => {
       renderWithRouterAndRedux(<Login />);
       userEvent.type(screen.getByTestId(emailInput), email);
-      expect(screen.getByRole('button', { name: 'Enter' })).toBeDisabled();
+      expect(screen.getByTestId(buttonId)).toBeDisabled();
       userEvent.type(screen.getByTestId(passInput), password);
-      expect(screen.getByRole('button', { name: 'Enter' })).toBeEnabled();
+      expect(screen.getByTestId(buttonId)).toBeEnabled();
     });
   });
   describe('4. Testa funcionalidade de login.', () => {
-    test('4.1. Testa se o button está renderizando.', async () => {
+    test('4.1. Testa se o button está renderizando.', () => {
       const { history } = renderWithRouterAndRedux(<App />);
-      await userEvent.type(screen.getByTestId(emailInput), email);
+      userEvent.type(screen.getByTestId(emailInput), email);
       expect(screen.getByTestId(buttonId)).toBeDisabled();
-      await userEvent.type(screen.getByTestId(passInput), password);
+      userEvent.type(screen.getByTestId(passInput), password);
       expect(screen.getByTestId(buttonId)).toBeEnabled();
+      console.log(screen.getByTestId(buttonId));
       userEvent.click(screen.getByTestId(buttonId));
       const { location: { pathname } } = history;
       expect(pathname).toBe('/meals');
