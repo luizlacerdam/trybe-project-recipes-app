@@ -15,17 +15,16 @@ function Login(props) {
     saveEmailLocalStorage({ email });
   };
 
-  const validateEmail = () => {
-    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    return regexEmail.test(email);
-  };
-
-  const validatePassword = () => {
-    const minCharacters = 7;
-    return password.length >= minCharacters;
-  };
-
   useEffect(() => {
+    const validateEmail = () => {
+      const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+      return regexEmail.test(email);
+    };
+
+    const validatePassword = () => {
+      const minCharacters = 7;
+      return password.length >= minCharacters;
+    };
     if (validateEmail() && validatePassword()) {
       setIsDisabled(false);
     } else {
