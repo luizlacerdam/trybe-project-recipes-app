@@ -49,7 +49,7 @@ describe('Testa a página de Login.', () => {
     });
   });
   describe('4. Testa funcionalidade de login.', () => {
-    test('4.1. Testa se o button está renderizando.', () => {
+    test('4.1. Testa se muda de rota.', () => {
       const { history } = renderWithRouterAndRedux(<App />);
       userEvent.type(screen.getByTestId(emailInput), email);
       expect(screen.getByTestId(buttonId)).toBeDisabled();
