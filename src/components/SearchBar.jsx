@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchMeals } from '../redux/actions';
+import { fetchDrinks, fetchMeals } from '../redux/actions';
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -16,13 +16,11 @@ function SearchBar() {
   const verifyPage = () => {
     const { location: { pathname } } = history;
     const { radio, search, filter } = apiRequest;
-    console.log(pathname);
 
     if (pathname === '/meals') {
-      console.log('Pagina de comida');
       dispatch(fetchMeals(radio, search, filter));
     } else if (pathname === '/drinks') {
-      console.log('Pagina de bebida');
+      dispatch(fetchDrinks(radio, search, filter));
     }
   };
 
