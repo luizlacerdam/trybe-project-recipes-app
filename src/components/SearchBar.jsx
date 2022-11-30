@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { fetchMeals } from '../redux/actions';
 
 function SearchBar() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [apiRequest, setApiRequest] = useState({ radio: '', filter: '', search: '' });
   // const [searchInput, setSearchInput] = useState('');
 
   // const handleSearch = ({ target: { value } }) => {
   //   setSearchInput(value);
   // };
+
+  const verifyPage = () => {
+    const { location: { pathname } } = history;
+    const { radio, search, filter } = apiRequest;
+    console.log(pathname);
+
+    if (pathname === '/meals') {
+      console.log('Pagina de comida');
+      dispatch(fetchMeals(radio, search, filter));
+    } else if (pathname === '/drinks') {
+      console.log('Pagina de bebida');
+    }
+  };
 
   const handleRadio = ({ target: { value } }) => {
     if (value === 'i') {
@@ -20,11 +35,11 @@ function SearchBar() {
   };
 
   const doSearch = () => {
-    const { radio, search, filter } = apiRequest;
+    const { radio, search } = apiRequest;
     if (radio === 'f' && search.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    dispatch(fetchMeals(radio, search, filter));
+    verifyPage();
   };
 
   return (
