@@ -9,7 +9,7 @@ const emailInput = 'email-input';
 const passInput = 'password-input';
 const buttonId = 'login-submit-btn';
 const email = 'aluno@trybe.com';
-const password = '123456';
+const password = '1234567';
 describe('Testa a página de Login.', () => {
   describe('1. Testa input de email.', () => {
     test('1.1. Testa se o input de email está renderizando.', () => {
@@ -49,15 +49,15 @@ describe('Testa a página de Login.', () => {
     });
   });
   describe('4. Testa funcionalidade de login.', () => {
-    test('4.1. Testa se o button está renderizando.', () => {
+    test('4.1. Testa se o button está renderizando.', async () => {
       const { history } = renderWithRouterAndRedux(<App />);
-      userEvent.type(screen.getByTestId(emailInput), email);
+      await userEvent.type(screen.getByTestId(emailInput), email);
       expect(screen.getByTestId(buttonId)).toBeDisabled();
-      userEvent.type(screen.getByTestId(passInput), password);
+      await userEvent.type(screen.getByTestId(passInput), password);
       expect(screen.getByTestId(buttonId)).toBeEnabled();
       userEvent.click(screen.getByTestId(buttonId));
       const { location: { pathname } } = history;
-      expect(pathname).toBe('/Recipes');
+      expect(pathname).toBe('/meals');
     });
   });
 });

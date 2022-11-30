@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -59,4 +58,4 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default connect()(Header);
+export default Header;

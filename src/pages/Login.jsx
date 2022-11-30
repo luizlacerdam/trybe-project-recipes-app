@@ -1,18 +1,20 @@
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { saveUser } from '../redux/actions';
 import saveEmailLocalStorage from '../services/LocalStorage';
 
-function Login(props) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    const { dispatch } = props;
     dispatch(saveUser({ email, password }));
     saveEmailLocalStorage({ email });
+    history.push('/meals');
   };
 
   useEffect(() => {
@@ -67,8 +69,5 @@ function Login(props) {
     </div>
   );
 }
-Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
 
-export default connect()(Login);
+export default Login;
