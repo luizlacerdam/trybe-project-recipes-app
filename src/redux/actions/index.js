@@ -26,11 +26,11 @@ export const responseMealsError = (error) => ({
   error,
 });
 
-export function fetchMeals(radio, search) {
+export function fetchMeals(radio, search, filter) {
   return async (dispatch) => {
     dispatch(requestMeals());
     try {
-      const response = await getMeals(radio, search);
+      const response = await getMeals(radio, search, filter);
       dispatch(responseMealsSuccess(response));
     } catch (error) {
       dispatch(responseMealsError(error));
