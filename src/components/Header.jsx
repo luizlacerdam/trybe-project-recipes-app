@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
+import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
@@ -33,12 +34,7 @@ function Header(props) {
       </button>
       <h1 data-testid="page-title">{title}</h1>
       {!searching ? '' : (
-        <input
-          data-testid="search-input"
-          value={ search }
-          onChange={ handleSearch }
-          type="text"
-        />
+        <SearchBar handleSearch={ handleSearch } search={ search } />
       )}
       {!searchButton ? '' : (
         <button onClick={ isSeaching } type="button">
