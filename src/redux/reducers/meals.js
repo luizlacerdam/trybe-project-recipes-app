@@ -4,6 +4,7 @@ import { RESPONSE_MEALS_ERROR,
 
 const INIT_STATE = {
   meals: [],
+  categoriesRecipeMeals: [],
   error: null,
 };
 

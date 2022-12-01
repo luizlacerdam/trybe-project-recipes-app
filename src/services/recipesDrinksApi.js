@@ -3,7 +3,6 @@ const recipesDrinksApi = async () => {
 
   const request = await fetch(ENDPOINT);
   const response = await request.json();
-  console.log(response);
   return request.ok ? Promise.resolve(response.drinks) : Promise.reject(response);
 };
 
