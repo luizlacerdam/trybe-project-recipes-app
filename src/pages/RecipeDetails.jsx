@@ -6,8 +6,8 @@ import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/acti
 function RecipeDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const mealsId = useParams('/meals/:id');
-  const { id } = mealsId;
+  const mealsOrDrinkId = useParams('/meals/:id');
+  const { id } = mealsOrDrinkId;
 
   useEffect(() => {
     const { location: { pathname } } = history;
