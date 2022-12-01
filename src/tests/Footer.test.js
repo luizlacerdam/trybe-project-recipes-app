@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import Footer from '../components/Footer';
+import { renderWithRouter } from './helpers/renderWith';
 
 describe('Testa componente Footer', () => {
   it('', () => {
