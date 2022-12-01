@@ -1,5 +1,6 @@
 import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
+import { LOGIN, LOGOUT } from './actionsTypes';
 
 // action type
 export const SAVE_USER = 'SAVE_USER';
@@ -42,6 +43,15 @@ export const responseDrinksSuccess = (drinks) => ({
 export const responseDrinksError = (error) => ({
   type: RESPONSE_DRINKS_ERROR,
   error,
+});
+
+export const actLogin = (state) => ({
+  type: LOGIN,
+  state,
+});
+
+export const actLogout = () => ({
+  type: LOGOUT,
 });
 
 export function fetchMeals(radio, search, filter) {
