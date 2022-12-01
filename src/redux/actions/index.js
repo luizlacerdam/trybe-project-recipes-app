@@ -2,6 +2,8 @@ import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
 import recipesMealsApi from '../../services/recipesMealsApi';
 import recipesDrinksApi from '../../services/recipesDrinksApi';
+import categoriesMealsApi from '../../services/categoriesMealsApi';
+import categoriesDrinksApi from '../../services/categoriesDrinksApi';
 
 // action type
 export const SAVE_USER = 'SAVE_USER';
@@ -18,6 +20,14 @@ export const REQUEST_RECIPES_MAIN_DRINKS = 'REQUEST_RECIPES_MAIN_DRINKS';
 export const
   RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS = 'RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS';
 export const RESPONSE_RECIPES_MAIN_DRINKS_ERROR = 'RESPONSE_RECIPES_MAIN_DRINKS_ERROR';
+
+export const REQUEST_RECIPES_CATEGORIES_MEALS = 'REQUEST_RECIPES_CATEGORIES_MEALS';
+export const
+  RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS = 'RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS';
+
+export const REQUEST_RECIPES_CATEGORIES_DRINKS = 'REQUEST_RECIPES_CATEGORIES_DRINKS';
+export const
+  RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE = 'RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE';
 
 // action creator
 export const saveUser = (userData) => ({
@@ -71,6 +81,24 @@ export const responseRecipesMainDrinksSucess = (drinks) => ({
   drinks,
 });
 
+export const requestRecipesCategoriesMeals = () => ({
+  type: REQUEST_RECIPES_CATEGORIES_MEALS,
+});
+
+export const responseRecipesCategoriesMealsSucess = (categories) => ({
+  type: RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS,
+  categories,
+});
+
+export const requestRecipesCategoriesDrinks = () => ({
+  type: REQUEST_RECIPES_CATEGORIES_DRINKS,
+});
+
+export const responseRecipesCategoriesDrinksSucess = (categories) => ({
+  type: RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE,
+  categories,
+});
+
 export function fetchMeals(radio, search, filter) {
   return async (dispatch) => {
     dispatch(requestMeals());
@@ -113,6 +141,30 @@ export function fetchRecipeMainDrinks() {
     try {
       const response = await recipesDrinksApi();
       dispatch(responseRecipesMainDrinksSucess(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function fetchRecipeCategoriesMeals() {
+  return async (dispatch) => {
+    dispatch(requestRecipesCategoriesMeals());
+    try {
+      const response = await categoriesMealsApi();
+      dispatch(responseRecipesCategoriesMealsSucess(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function fetchRecipeCategoriesDrinks() {
+  return async (dispatch) => {
+    dispatch(requestRecipesCategoriesDrinks());
+    try {
+      const response = await categoriesDrinksApi();
+      dispatch(responseRecipesCategoriesDrinksSucess(response));
     } catch (error) {
       console.log(error);
     }
