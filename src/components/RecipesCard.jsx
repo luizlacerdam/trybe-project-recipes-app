@@ -6,7 +6,7 @@ function RecipesCard({ recipe, index, page }) {
     if (page === '/meals') {
       imgThumb = 'strMealThumb';
     } else
-    if (page === 'drinks') {
+    if (page === '/drinks') {
       imgThumb = 'strDrinkThumb';
     }
     return imgThumb;
@@ -17,7 +17,7 @@ function RecipesCard({ recipe, index, page }) {
     if (page === '/meals') {
       nameStr = 'strMeal';
     } else
-    if (page === 'drinks') {
+    if (page === '/drinks') {
       nameStr = 'strDrink';
     }
     return nameStr;

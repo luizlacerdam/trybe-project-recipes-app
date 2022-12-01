@@ -1,6 +1,7 @@
 import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
 import recipesMealsApi from '../../services/recipesMealsApi';
+import recipesDrinksApi from '../../services/recipesDrinksApi';
 
 // action type
 export const SAVE_USER = 'SAVE_USER';
@@ -13,6 +14,10 @@ export const RESPONSE_DRINKS_ERROR = 'RESPONSE_DRINKS_ERROR';
 export const REQUEST_RECIPES_MAIN_MEALS = 'REQUEST_RECIPES_MAIN_MEALS';
 export const RESPONSE_RECIPES_MAIN_MEALS_SUCCESS = 'RESPONSE_RECIPES_MAIN_MEALS_SUCCESS';
 export const RESPONSE_RECIPES_MAIN_MEALS_ERROR = 'RESPONSE_RECIPES_MAIN_MEALS_ERROR';
+export const REQUEST_RECIPES_MAIN_DRINKS = 'REQUEST_RECIPES_MAIN_DRINKS';
+export const
+  RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS = 'RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS';
+export const RESPONSE_RECIPES_MAIN_DRINKS_ERROR = 'RESPONSE_RECIPES_MAIN_DRINKS_ERROR';
 
 // action creator
 export const saveUser = (userData) => ({
@@ -57,6 +62,15 @@ export const responseRecipesMainMealsSucess = (meals) => ({
   meals,
 });
 
+export const requestRecipesMainDrinks = () => ({
+  type: REQUEST_RECIPES_MAIN_DRINKS,
+});
+
+export const responseRecipesMainDrinksSucess = (drinks) => ({
+  type: RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS,
+  drinks,
+});
+
 export function fetchMeals(radio, search, filter) {
   return async (dispatch) => {
     dispatch(requestMeals());
@@ -87,6 +101,18 @@ export function fetchRecipeMainMeals() {
     try {
       const response = await recipesMealsApi();
       dispatch(responseRecipesMainMealsSucess(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function fetchRecipeMainDrinks() {
+  return async (dispatch) => {
+    dispatch(requestRecipesMainDrinks());
+    try {
+      const response = await recipesDrinksApi();
+      dispatch(responseRecipesMainDrinksSucess(response));
     } catch (error) {
       console.log(error);
     }

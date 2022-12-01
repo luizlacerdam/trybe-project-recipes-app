@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchRecipeMainMeals } from '../redux/actions';
+import { fetchRecipeMainDrinks, fetchRecipeMainMeals } from '../redux/actions';
 import RecipesCard from './RecipesCard';
 
 function Recipes() {
@@ -10,10 +10,15 @@ function Recipes() {
   const { location: { pathname } } = history;
   const TWELVE = 12;
   const MEALS = useSelector((state) => state.meals.meals);
-  // const DRINKS = useSelector((state) => state.drinks.drinks);
+  const DRINKS = useSelector((state) => state.drinks.drinks);
 
   useEffect(() => {
-    dispatch(fetchRecipeMainMeals());
+    if (pathname === '/meals') {
+      dispatch(fetchRecipeMainMeals());
+    } else
+    if (pathname === '/drinks') {
+      dispatch(fetchRecipeMainDrinks());
+    }
   }, []);
 
   const verifyPage = () => {
