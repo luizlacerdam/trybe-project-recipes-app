@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchDrinks, fetchMeals } from '../redux/actions';
 
 function SearchBar() {
+  const meals = useSelector((state) => state.meals.meals);
+  const drinks = useSelector((state) => state.drinks.drinks);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [apiRequest, setApiRequest] = useState({ radio: '', filter: '', search: '' });
-  // const [searchInput, setSearchInput] = useState('');
+  const [apiRequest, setApiRequest] = useState(
+    { radio: 'i', filter: 'filter', search: '' },
+  );
 
-  // const handleSearch = ({ target: { value } }) => {
-  //   setSearchInput(value);
-  // };
-
-  const verifyPage = () => {
+  const verifyPage = async () => {
     const { location: { pathname } } = history;
     const { radio, search, filter } = apiRequest;
 
     if (pathname === '/meals') {
-      dispatch(fetchMeals(radio, search, filter));
+      await dispatch(fetchMeals(radio, search, filter));
     } else if (pathname === '/drinks') {
-      dispatch(fetchDrinks(radio, search, filter));
+      await dispatch(fetchDrinks(radio, search, filter));
+      console.log(drinks);
     }
   };
+
+  useEffect(() => {
+    const changePage = () => {
+      const { location: { pathname } } = history;
+      if (pathname === '/meals' && meals.length === 1) {
+        const { idMeal } = meals[0];
+        history.push(`/meals/${idMeal}`);
+      } else if (pathname === '/drinks' && drinks.length === 1) {
+        const { idDrink } = drinks[0];
+        console.log(drinks);
+        history.push(`/drinks/${idDrink}`);
+      }
+    };
+    changePage();
+  }, [meals, drinks, history]);
 
   const handleRadio = ({ target: { value } }) => {
     if (value === 'i') {
@@ -32,12 +47,12 @@ function SearchBar() {
     }
   };
 
-  const doSearch = () => {
+  const doSearch = async () => {
     const { radio, search } = apiRequest;
     if (radio === 'f' && search.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    verifyPage();
+    await verifyPage();
   };
 
   return (
@@ -89,7 +104,6 @@ function SearchBar() {
         type="button"
       >
         Search
-
       </button>
     </div>
   );
