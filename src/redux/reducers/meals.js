@@ -1,10 +1,13 @@
 import { RESPONSE_MEALS_ERROR,
   RESPONSE_MEALS_SUCCESS,
-  RESPONSE_RECIPES_MAIN_MEALS_SUCCESS } from '../actions';
+  RESPONSE_RECIPES_MAIN_MEALS_SUCCESS,
+  RESPONSE_RECIPE_MEALS_SUCCESS,
+} from '../actions';
 
 const INIT_STATE = {
   meals: [],
   error: null,
+  recipeMeals: [],
 };
 
 const meals = (state = INIT_STATE, action) => {
@@ -23,6 +26,11 @@ const meals = (state = INIT_STATE, action) => {
     return {
       ...state,
       meals: action.meals,
+    };
+  case RESPONSE_RECIPE_MEALS_SUCCESS:
+    return {
+      ...state,
+      recipeMeals: [...action.responseRecipesMeals],
     };
   default:
     return state;
