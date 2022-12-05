@@ -7,7 +7,6 @@ import { getRecipeDrinksApi, getRecipeMealsApi } from '../../services/recipesApi
 import categoriesMealsApi from '../../services/categoriesMealsApi';
 import categoriesDrinksApi from '../../services/categoriesDrinksApi';
 
-
 // action type
 export const SAVE_USER = 'SAVE_USER';
 export const REQUEST_MEALS = 'REQUEST_MEALS';
@@ -125,6 +124,7 @@ export const responseRecipeDrinksSuccess = (responseRecipeDrinks) => ({
 export const responseRecipeDrinksError = (error) => ({
   type: RESPONSE_RECIPE_DRINKS_ERROR,
   error,
+});
 
 export const requestRecipesCategoriesMeals = () => ({
   type: REQUEST_RECIPES_CATEGORIES_MEALS,
@@ -201,7 +201,9 @@ export function fetchRecipeDetailsMeals(idRecipeMeals) {
       dispatch(responseRecipeMealsSuccess(response));
     } catch (error) {
       dispatch(responseRecipeMealsError(error));
-
+    }
+  };
+}
 export function fetchRecipeDetailsDrinks(idRecipeDrinks) {
   return async (dispatch) => {
     dispatch(requestRecipeDrinks());
@@ -226,7 +228,7 @@ export function fetchRecipeCategoriesMeals() {
     }
   };
 }
-  
+
 export function fetchRecipeCategoriesDrinks() {
   return async (dispatch) => {
     dispatch(requestRecipesCategoriesDrinks());

@@ -28,13 +28,13 @@ const meals = (state = INIT_STATE, action) => {
       ...state,
       meals: action.meals,
     };
-      
+
   case RESPONSE_RECIPE_MEALS_SUCCESS:
     return {
       ...state,
       recipeMeals: [...action.responseRecipesMeals],
     };
-      
+
   case RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS:
     return {
       ...state,
