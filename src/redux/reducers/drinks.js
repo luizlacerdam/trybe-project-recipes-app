@@ -1,12 +1,14 @@
 import { RESPONSE_DRINKS_ERROR,
   RESPONSE_DRINKS_SUCCESS,
   RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE,
+  RESPONSE_RECIPE_DRINKS_SUCCESS,
   RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS } from '../actions';
 
 const INIT_STATE = {
   drinks: [],
   categoriesRecipeDrinks: [],
   error: null,
+  recipeDrinks: [],
 };
 
 const drinks = (state = INIT_STATE, action) => {
@@ -26,6 +28,13 @@ const drinks = (state = INIT_STATE, action) => {
       ...state,
       drinks: action.drinks,
     };
+
+  case RESPONSE_RECIPE_DRINKS_SUCCESS:
+    return {
+      ...state,
+      recipeDrinks: [...action.responseRecipeDrinks],
+    };
+
   case RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE:
     return {
       ...state,
