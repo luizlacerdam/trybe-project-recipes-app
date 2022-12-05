@@ -1,5 +1,6 @@
 import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
+import { LOGIN, LOGOUT } from './actionsTypes';
 import recipesMealsApi from '../../services/recipesMealsApi';
 import recipesDrinksApi from '../../services/recipesDrinksApi';
 import categoriesMealsApi from '../../services/categoriesMealsApi';
@@ -61,6 +62,15 @@ export const responseDrinksSuccess = (drinks) => ({
 export const responseDrinksError = (error) => ({
   type: RESPONSE_DRINKS_ERROR,
   error,
+});
+
+export const actLogin = (state) => ({
+  type: LOGIN,
+  state,
+});
+
+export const actLogout = () => ({
+  type: LOGOUT,
 });
 
 export const requestRecipesMainMeals = () => ({
