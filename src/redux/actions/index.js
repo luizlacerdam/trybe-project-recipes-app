@@ -71,7 +71,8 @@ export const actLogin = (state) => ({
 
 export const actLogout = () => ({
   type: LOGOUT,
-=======
+});
+
 export const requestRecipesMainMeals = () => ({
   type: REQUEST_RECIPES_MAIN_MEALS,
 });
