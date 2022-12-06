@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
+import { fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
+  fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
   fetchRecipeMainDrinks,
   fetchRecipeMainMeals } from '../redux/actions';
 import RecipesCard from './RecipesCard';
@@ -57,17 +58,40 @@ function Recipes() {
       {verifyPageCategories().map((category, index) => {
         if (index < FIVE) {
           return (
-            <div
+            <button
               key={ category.strCategory }
               data-testid={ `${category.strCategory}-category-filter` }
+              type="button"
+              onClick={ () => {
+                if (pathname === '/meals') {
+                  return (dispatch(fetchCategoryMealsFilter(category.strCategory)));
+                } if (pathname === '/drinks') {
+                  return (dispatch(fetchCategoryDrinksFilter(category
+                    .strCategory)));
+                }
+              } }
             >
               {category.strCategory}
 
-            </div>
+            </button>
           );
         }
         return true;
       })}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => {
+          if (pathname === '/meals') {
+            return (dispatch(fetchRecipeMainMeals()));
+          } if (pathname === '/drinks') {
+            return (dispatch(fetchRecipeMainDrinks()));
+          }
+        } }
+      >
+        All
+
+      </button>
       {verifyPageRecipes().map((recipe, index) => {
         if (index < TWELVE) {
           return (<RecipesCard
