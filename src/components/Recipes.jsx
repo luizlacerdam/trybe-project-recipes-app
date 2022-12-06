@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchCategoryMealsFilter,
+import { fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
   fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
   fetchRecipeMainDrinks,
   fetchRecipeMainMeals } from '../redux/actions';
@@ -62,7 +62,14 @@ function Recipes() {
               key={ category.strCategory }
               data-testid={ `${category.strCategory}-category-filter` }
               type="button"
-              onClick={ () => dispatch(fetchCategoryMealsFilter(category.strCategory)) }
+              onClick={ () => {
+                if (pathname === '/meals') {
+                  return (dispatch(fetchCategoryMealsFilter(category.strCategory)));
+                } if (pathname === '/drinks') {
+                  return (dispatch(fetchCategoryDrinksFilter(category
+                    .strCategory)));
+                }
+              } }
             >
               {category.strCategory}
 
@@ -74,7 +81,13 @@ function Recipes() {
       <button
         type="button"
         data-testid="All-category-filter"
-        onClick={ () => dispatch(fetchRecipeMainMeals()) }
+        onClick={ () => {
+          if (pathname === '/meals') {
+            return (dispatch(fetchRecipeMainMeals()));
+          } if (pathname === '/drinks') {
+            return (dispatch(fetchRecipeMainDrinks()));
+          }
+        } }
       >
         All
 
