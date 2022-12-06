@@ -1,43 +1,22 @@
 import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
-import { LOGIN, LOGOUT } from './actionsTypes';
+import {
+  CLEAN_DRINKS_ERROR, LOGIN, LOGOUT, REQUEST_DRINKS, REQUEST_MEALS,
+  REQUEST_RECIPES_CATEGORIES_DRINKS, REQUEST_RECIPES_CATEGORIES_MEALS,
+  REQUEST_RECIPES_MAIN_DRINKS, REQUEST_RECIPES_MAIN_MEALS,
+  REQUEST_RECIPE_DRINKS, REQUEST_RECIPE_MEALS,
+  RESPONSE_DRINKS_ERROR, RESPONSE_DRINKS_SUCCESS, RESPONSE_MEALS_ERROR,
+  RESPONSE_MEALS_SUCCESS, RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE,
+  RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS,
+  RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS, RESPONSE_RECIPES_MAIN_MEALS_SUCCESS,
+  RESPONSE_RECIPE_DRINKS_ERROR, RESPONSE_RECIPE_DRINKS_SUCCESS,
+  RESPONSE_RECIPE_MEALS_ERROR, RESPONSE_RECIPE_MEALS_SUCCESS,
+  SAVE_USER } from './actionsTypes';
 import recipesMealsApi from '../../services/recipesMealsApi';
 import recipesDrinksApi from '../../services/recipesDrinksApi';
 import { getRecipeDrinksApi, getRecipeMealsApi } from '../../services/recipesApi';
-import categoriesMealsApi from '../../services/categoriesMealsApi';
-import categoriesDrinksApi from '../../services/categoriesDrinksApi';
-
-// action type
-export const SAVE_USER = 'SAVE_USER';
-export const REQUEST_MEALS = 'REQUEST_MEALS';
-export const RESPONSE_MEALS_SUCCESS = 'RESPONSE_MEALS_SUCCESS';
-export const RESPONSE_MEALS_ERROR = 'RESPONSE_MEALS_ERROR';
-export const REQUEST_DRINKS = 'REQUEST_DRINKS';
-export const RESPONSE_DRINKS_SUCCESS = 'RESPONSE_DRINKS_SUCCESS';
-export const RESPONSE_DRINKS_ERROR = 'RESPONSE_DRINKS_ERROR';
-export const CLEAN_DRINKS_ERROR = 'CLEAN_DRINKS_ERROR';
-export const CLEAN_MEALS_ERROR = 'CLEAN_MEALS_ERROR';
-export const REQUEST_RECIPES_MAIN_MEALS = 'REQUEST_RECIPES_MAIN_MEALS';
-export const RESPONSE_RECIPES_MAIN_MEALS_SUCCESS = 'RESPONSE_RECIPES_MAIN_MEALS_SUCCESS';
-export const RESPONSE_RECIPES_MAIN_MEALS_ERROR = 'RESPONSE_RECIPES_MAIN_MEALS_ERROR';
-export const REQUEST_RECIPES_MAIN_DRINKS = 'REQUEST_RECIPES_MAIN_DRINKS';
-export const
-  RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS = 'RESPONSE_RECIPES_MAIN_DRINKS_SUCCESS';
-export const RESPONSE_RECIPES_MAIN_DRINKS_ERROR = 'RESPONSE_RECIPES_MAIN_DRINKS_ERROR';
-export const REQUEST_RECIPE_MEALS = 'REQUEST_RECIPE_MEALS';
-export const RESPONSE_RECIPE_MEALS_SUCCESS = 'RESPONSE_RECIPE_MEALS_SUCCESS';
-export const RESPONSE_RECIPE_MEALS_ERROR = 'RESPONSE_RECIPE_MEALS_ERROR';
-export const REQUEST_RECIPE_DRINKS = 'REQUEST_RECIPE_DRINKS';
-export const RESPONSE_RECIPE_DRINKS_SUCCESS = 'RESPONSE_RECIPE_DRINKS_SUCCESS';
-export const RESPONSE_RECIPE_DRINKS_ERROR = 'RESPONSE_RECIPE_DRINKS_ERROR';
-
-export const REQUEST_RECIPES_CATEGORIES_MEALS = 'REQUEST_RECIPES_CATEGORIES_MEALS';
-export const
-  RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS = 'RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS';
-
-export const REQUEST_RECIPES_CATEGORIES_DRINKS = 'REQUEST_RECIPES_CATEGORIES_DRINKS';
-export const
-  RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE = 'RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE';
+import categoriesListDrinksApi from '../../services/categoriesListDrinksApi';
+import categoriesListMealsApi from '../../services/categoriesListMealsApi';
 
 // action creator
 export const saveUser = (userData) => ({
@@ -229,7 +208,7 @@ export function fetchRecipeCategoriesMeals() {
   return async (dispatch) => {
     dispatch(requestRecipesCategoriesMeals());
     try {
-      const response = await categoriesMealsApi();
+      const response = await categoriesListMealsApi();
       dispatch(responseRecipesCategoriesMealsSucess(response));
     } catch (error) {
       console.log(error);
@@ -241,7 +220,7 @@ export function fetchRecipeCategoriesDrinks() {
   return async (dispatch) => {
     dispatch(requestRecipesCategoriesDrinks());
     try {
-      const response = await categoriesDrinksApi();
+      const response = await categoriesListDrinksApi();
       dispatch(responseRecipesCategoriesDrinksSucess(response));
     } catch (error) {
       console.log(error);
