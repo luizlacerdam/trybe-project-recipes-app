@@ -1,4 +1,5 @@
-import { RESPONSE_MEALS_ERROR, RESPONSE_MEALS_SUCCESS } from '../actions';
+import {
+  CLEAN_MEALS_ERROR, RESPONSE_MEALS_ERROR, RESPONSE_MEALS_SUCCESS } from '../actions';
 
 const INIT_STATE = {
   meals: [],
@@ -15,7 +16,12 @@ const meals = (state = INIT_STATE, action) => {
   case RESPONSE_MEALS_ERROR:
     return {
       ...state,
-      error: action.error,
+      error: 'error',
+    };
+  case CLEAN_MEALS_ERROR:
+    return {
+      ...state,
+      error: null,
     };
   default:
     return state;

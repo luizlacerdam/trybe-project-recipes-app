@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchDrinks, fetchMeals } from '../redux/actions';
+import {
+  cleanDrinksError, cleanMealsError, fetchDrinks, fetchMeals } from '../redux/actions';
 
 function SearchBar() {
   const meals = useSelector((state) => state.meals.meals);
   const drinks = useSelector((state) => state.drinks.drinks);
+  const errorMeals = useSelector((state) => state.meals.error);
+  const errorDrinks = useSelector((state) => state.drinks.error);
   const dispatch = useDispatch();
   const history = useHistory();
   const [apiRequest, setApiRequest] = useState(
     { radio: 'i', filter: 'filter', search: '' },
   );
+  const [searched, setSearched] = useState(false);
 
-  const verifyPage = async () => {
+  const verifyPage = () => {
     const { location: { pathname } } = history;
     const { radio, search, filter } = apiRequest;
 
     if (pathname === '/meals') {
-      await dispatch(fetchMeals(radio, search, filter));
+      dispatch(fetchMeals(radio, search, filter));
     } else if (pathname === '/drinks') {
-      await dispatch(fetchDrinks(radio, search, filter));
-      console.log(drinks);
+      dispatch(fetchDrinks(radio, search, filter));
     }
   };
 
@@ -47,12 +50,27 @@ function SearchBar() {
     }
   };
 
-  const doSearch = async () => {
+  useEffect(() => {
+    const didReturn = async () => {
+      console.log(errorDrinks);
+      console.log(errorMeals);
+      if (searched && (errorDrinks === 'error' || errorMeals === 'error')) {
+        setSearched(false);
+        await dispatch(cleanDrinksError);
+        await dispatch(cleanMealsError);
+        return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      }
+    };
+    didReturn();
+  }, [errorDrinks, errorMeals]);
+
+  const doSearch = () => {
     const { radio, search } = apiRequest;
+    setSearched(true);
     if (radio === 'f' && search.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    await verifyPage();
+    verifyPage();
   };
 
   return (
