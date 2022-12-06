@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
@@ -10,6 +10,7 @@ import RecipesCard from './RecipesCard';
 function Recipes() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [categoryToggle, setCategoryToggle] = useState('');
   const { location: { pathname } } = history;
   const FIVE = 5;
   const TWELVE = 12;
@@ -62,7 +63,17 @@ function Recipes() {
               key={ category.strCategory }
               data-testid={ `${category.strCategory}-category-filter` }
               type="button"
-              onClick={ () => {
+              name={ category.strCategory }
+              onClick={ (event) => {
+                const { name } = event.target;
+                if (categoryToggle === name) {
+                  if (pathname === '/meals') {
+                    return (dispatch(fetchRecipeMainMeals()));
+                  } if (pathname === '/drinks') {
+                    return (dispatch(fetchRecipeMainDrinks()));
+                  }
+                }
+                setCategoryToggle(category.strCategory);
                 if (pathname === '/meals') {
                   return (dispatch(fetchCategoryMealsFilter(category.strCategory)));
                 } if (pathname === '/drinks') {
