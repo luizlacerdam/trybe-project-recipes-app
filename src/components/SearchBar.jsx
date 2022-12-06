@@ -67,7 +67,7 @@ function SearchBar() {
   const doSearch = () => {
     const { radio, search } = apiRequest;
     setSearched(true);
-    if (radio === 'f' && search.length > 1) {
+    if (radio === 'f' && search.length !== 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
     verifyPage();
