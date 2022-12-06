@@ -7,9 +7,9 @@ function Meals() {
   return (
     <div>
       <Header title="Meals" searchButton />
-      <Footer />
       <p>Meals</p>
       <Recipes />
+      <Footer />
     </div>
   );
 }
