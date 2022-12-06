@@ -54,6 +54,25 @@ function Recipes() {
     return CATEGORIES;
   };
 
+  const handleCategoryFilter = (event, category) => {
+    const { name } = event.target;
+    // start toggle
+    if (categoryToggle === name) {
+      if (pathname === '/meals') {
+        return (dispatch(fetchRecipeMainMeals()));
+      } if (pathname === '/drinks') {
+        return (dispatch(fetchRecipeMainDrinks()));
+      }
+    }
+    setCategoryToggle(category);
+    // ends toggle
+    if (pathname === '/meals') {
+      return (dispatch(fetchCategoryMealsFilter(category)));
+    } if (pathname === '/drinks') {
+      return (dispatch(fetchCategoryDrinksFilter(category)));
+    }
+  };
+
   return (
     <main>
       {verifyPageCategories().map((category, index) => {
@@ -65,21 +84,7 @@ function Recipes() {
               type="button"
               name={ category.strCategory }
               onClick={ (event) => {
-                const { name } = event.target;
-                if (categoryToggle === name) {
-                  if (pathname === '/meals') {
-                    return (dispatch(fetchRecipeMainMeals()));
-                  } if (pathname === '/drinks') {
-                    return (dispatch(fetchRecipeMainDrinks()));
-                  }
-                }
-                setCategoryToggle(category.strCategory);
-                if (pathname === '/meals') {
-                  return (dispatch(fetchCategoryMealsFilter(category.strCategory)));
-                } if (pathname === '/drinks') {
-                  return (dispatch(fetchCategoryDrinksFilter(category
-                    .strCategory)));
-                }
+                handleCategoryFilter(event, category.strCategory);
               } }
             >
               {category.strCategory}
