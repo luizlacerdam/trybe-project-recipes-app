@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
+import { fetchCategoryMealsFilter, fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
   fetchRecipeMainDrinks,
   fetchRecipeMainMeals } from '../redux/actions';
 import RecipesCard from './RecipesCard';
@@ -57,17 +57,27 @@ function Recipes() {
       {verifyPageCategories().map((category, index) => {
         if (index < FIVE) {
           return (
-            <div
+            <button
               key={ category.strCategory }
               data-testid={ `${category.strCategory}-category-filter` }
+              type="button"
+              onClick={ () => dispatch(fetchCategoryMealsFilter(category.strCategory)) }
             >
               {category.strCategory}
 
-            </div>
+            </button>
           );
         }
         return true;
       })}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => dispatch(fetchRecipeMainMeals()) }
+      >
+        All
+
+      </button>
       {verifyPageRecipes().map((recipe, index) => {
         if (index < TWELVE) {
           return (<RecipesCard
