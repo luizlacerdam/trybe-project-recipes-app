@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
@@ -10,6 +10,7 @@ import RecipesCard from './RecipesCard';
 function Recipes() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [categoryToggle, setCategoryToggle] = useState('');
   const { location: { pathname } } = history;
   const FIVE = 5;
   const TWELVE = 12;
@@ -53,6 +54,25 @@ function Recipes() {
     return CATEGORIES;
   };
 
+  const handleCategoryFilter = (event, category) => {
+    const { name } = event.target;
+    // start toggle
+    if (categoryToggle === name) {
+      if (pathname === '/meals') {
+        return (dispatch(fetchRecipeMainMeals()));
+      } if (pathname === '/drinks') {
+        return (dispatch(fetchRecipeMainDrinks()));
+      }
+    }
+    setCategoryToggle(category);
+    // ends toggle
+    if (pathname === '/meals') {
+      return (dispatch(fetchCategoryMealsFilter(category)));
+    } if (pathname === '/drinks') {
+      return (dispatch(fetchCategoryDrinksFilter(category)));
+    }
+  };
+
   return (
     <main>
       {verifyPageCategories().map((category, index) => {
@@ -62,13 +82,9 @@ function Recipes() {
               key={ category.strCategory }
               data-testid={ `${category.strCategory}-category-filter` }
               type="button"
-              onClick={ () => {
-                if (pathname === '/meals') {
-                  return (dispatch(fetchCategoryMealsFilter(category.strCategory)));
-                } if (pathname === '/drinks') {
-                  return (dispatch(fetchCategoryDrinksFilter(category
-                    .strCategory)));
-                }
+              name={ category.strCategory }
+              onClick={ (event) => {
+                handleCategoryFilter(event, category.strCategory);
               } }
             >
               {category.strCategory}
