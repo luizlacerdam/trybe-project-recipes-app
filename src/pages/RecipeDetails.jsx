@@ -22,7 +22,7 @@ function RecipeDetails() {
       dispatch(fetchRecipeDetailsDrinks(id));
       setIsMeal(false);
     }
-  });
+  }, []);
 
   if (pathname === `/meals/${id}`) {
     recipeDetail = recipeDetailMeal;
