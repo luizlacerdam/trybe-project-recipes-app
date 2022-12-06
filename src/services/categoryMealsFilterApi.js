@@ -1,4 +1,4 @@
-const categoriesMealsFilterApi = async (category) => {
+const categoryMealsFilterApi = async (category) => {
   const ENDPOINT = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
 
   const request = await fetch(ENDPOINT);
@@ -7,4 +7,4 @@ const categoriesMealsFilterApi = async (category) => {
   return request.ok ? Promise.resolve(response.meals) : Promise.reject(response);
 };
 
-export default categoriesMealsFilterApi;
+export default categoryMealsFilterApi;
