@@ -1,12 +1,10 @@
 import getDrinkApi from '../../services/drinksApi';
 import getMeals from '../../services/mealsApi';
 import {
-  CLEAN_DRINKS_ERROR, LOGIN, LOGOUT, REQUEST_CATEGORY_MEALS_FILTER,
-  REQUEST_DRINKS, REQUEST_MEALS,
+  CLEAN_DRINKS_ERROR, LOGIN, LOGOUT, REQUEST_DRINKS, REQUEST_MEALS,
   REQUEST_RECIPES_CATEGORIES_DRINKS, REQUEST_RECIPES_CATEGORIES_MEALS,
   REQUEST_RECIPES_MAIN_DRINKS, REQUEST_RECIPES_MAIN_MEALS,
   REQUEST_RECIPE_DRINKS, REQUEST_RECIPE_MEALS,
-  RESPONSE_CATEGORY_MEALS_FILTER_SUCCESS,
   RESPONSE_DRINKS_ERROR, RESPONSE_DRINKS_SUCCESS, RESPONSE_MEALS_ERROR,
   RESPONSE_MEALS_SUCCESS, RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE,
   RESPONSE_RECIPES_CATEGORIES_MEALS_SUCCESS,
@@ -20,6 +18,7 @@ import { getRecipeDrinksApi, getRecipeMealsApi } from '../../services/recipesApi
 import categoriesListDrinksApi from '../../services/categoriesListDrinksApi';
 import categoriesListMealsApi from '../../services/categoriesListMealsApi';
 import categoryMealsFilterApi from '../../services/categoryMealsFilterApi';
+import categoryDrinksFilterApi from '../../services/categoryDrinksFilterApi';
 
 // action creator
 export const saveUser = (userData) => ({
@@ -102,13 +101,6 @@ export const requestRecipesCategoriesDrinks = () => ({
 export const responseRecipesCategoriesDrinksSucess = (categories) => ({
   type: RESPONSE_RECIPES_CATEGORIES_DRINKS_SUCCE,
   categories,
-});
-export const requestCategoryMealsFilter = () => ({
-  type: REQUEST_CATEGORY_MEALS_FILTER,
-});
-export const responseCategoryMealsFilter = (meals) => ({
-  type: RESPONSE_CATEGORY_MEALS_FILTER_SUCCESS,
-  meals,
 });
 export function fetchMeals(radio, search, filter) {
   return async (dispatch) => {
@@ -212,6 +204,17 @@ export function fetchCategoryMealsFilter(category) {
     try {
       const response = await categoryMealsFilterApi(category);
       dispatch(responseRecipesMainMealsSucess(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function fetchCategoryDrinksFilter(category) {
+  return async (dispatch) => {
+    dispatch(requestRecipesMainDrinks());
+    try {
+      const response = await categoryDrinksFilterApi(category);
+      dispatch(responseRecipesMainDrinksSucess(response));
     } catch (error) {
       console.log(error);
     }
