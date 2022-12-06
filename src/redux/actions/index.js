@@ -15,6 +15,8 @@ export const RESPONSE_MEALS_ERROR = 'RESPONSE_MEALS_ERROR';
 export const REQUEST_DRINKS = 'REQUEST_DRINKS';
 export const RESPONSE_DRINKS_SUCCESS = 'RESPONSE_DRINKS_SUCCESS';
 export const RESPONSE_DRINKS_ERROR = 'RESPONSE_DRINKS_ERROR';
+export const CLEAN_DRINKS_ERROR = 'CLEAN_DRINKS_ERROR';
+export const CLEAN_MEALS_ERROR = 'CLEAN_MEALS_ERROR';
 export const REQUEST_RECIPES_MAIN_MEALS = 'REQUEST_RECIPES_MAIN_MEALS';
 export const RESPONSE_RECIPES_MAIN_MEALS_SUCCESS = 'RESPONSE_RECIPES_MAIN_MEALS_SUCCESS';
 export const RESPONSE_RECIPES_MAIN_MEALS_ERROR = 'RESPONSE_RECIPES_MAIN_MEALS_ERROR';
@@ -52,9 +54,8 @@ export const responseMealsSuccess = (meals) => ({
   meals,
 });
 
-export const responseMealsError = (error) => ({
+export const responseMealsError = () => ({
   type: RESPONSE_MEALS_ERROR,
-  error,
 });
 
 export const requestDrinks = () => ({
@@ -66,9 +67,8 @@ export const responseDrinksSuccess = (drinks) => ({
   drinks,
 });
 
-export const responseDrinksError = (error) => ({
+export const responseDrinksError = () => ({
   type: RESPONSE_DRINKS_ERROR,
-  error,
 });
 
 export const actLogin = (state) => ({
@@ -151,7 +151,7 @@ export function fetchMeals(radio, search, filter) {
       const response = await getMeals(radio, search, filter);
       dispatch(responseMealsSuccess(response));
     } catch (error) {
-      dispatch(responseMealsError(error));
+      dispatch(responseMealsError());
     }
   };
 }
@@ -163,10 +163,18 @@ export function fetchDrinks(radio, search, filter) {
       const response = await getDrinkApi(radio, search, filter);
       dispatch(responseDrinksSuccess(response));
     } catch (error) {
-      dispatch(responseDrinksError(error));
+      dispatch(responseDrinksError());
     }
   };
 }
+
+export const cleanDrinksError = () => ({
+  type: CLEAN_DRINKS_ERROR,
+});
+
+export const cleanMealsError = () => ({
+  type: CLEAN_DRINKS_ERROR,
+});
 
 export function fetchRecipeMainMeals() {
   return async (dispatch) => {
