@@ -48,6 +48,12 @@ describe('Testa a o componente Recipes.', () => {
       userEvent.click(await screen.findByTestId(AllButton));
       expect(await screen.findByText('Corba')).toBeInTheDocument();
     });
+    test('1.5. Testa se ao clicar em um card de "/meals" é direcionado para a página do mesmo.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push('/meals'));
+      expect(await screen.findByText('Corbsa')).toBeInTheDocument();
+      userEvent.click(await screen.findByTestId(goatCategory));
+    });
   });
   describe('2. Testa o componente Recipes em "/drinks".', () => {
     beforeEach(() => {
