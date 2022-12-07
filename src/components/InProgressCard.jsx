@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/RecipeInProgress.css';
 
 function InProgressCard() {
   // const currentRecipe = useSelector((state) => state.inProgress.current);
@@ -22,6 +23,7 @@ function InProgressCard() {
     strIngredient13: null,
     strIngredient14: null,
     strIngredient15: null }];
+  const [checkList, setCheckList] = useState([]);
   const getIngredients = () => {
     const result = currentRecipe.map((element) => Object.entries(element)
       .filter((elem) => elem[0].includes('strIngredient')
@@ -39,6 +41,17 @@ function InProgressCard() {
     if (pathname.includes('/meals')) setPage('Meal');
     if (pathname.includes('/drinks')) setPage('Drink');
   }, [pathname]);
+
+  const handleChange = ({ target }) => {
+    const { name, checked } = target;
+    if (checked === true) setCheckList([...checkList, name]);
+    if (checked === false) {
+      const result = checkList.filter((element) => element !== name);
+      console.log(result);
+      setCheckList([...result]);
+    }
+  };
+
   return (
     <div>
       <img
@@ -58,11 +71,13 @@ function InProgressCard() {
             data-testid={ `${index}-ingredient-step` }
             key={ `ingredient-${index}` }
             htmlFor={ `ingredient-${index}` }
+            className={ checkList.includes(ingredient) ? 'checked' : '' }
           >
             <input
               type="checkbox"
               name={ ingredient }
               id={ `ingredient-${index}` }
+              onChange={ handleChange }
             />
             { ingredient }
           </label>
