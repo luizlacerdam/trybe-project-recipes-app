@@ -1,3 +1,4 @@
+import recipesDrinksApi from '../../services/recipesDrinksApi';
 import recipesMealsApi from '../../services/recipesMealsApi';
 import {
   REQUEST_MEALS_RECOMMENDATION,
@@ -36,7 +37,7 @@ export function fetchRecommendationMeals() {
   return async (dispatch) => {
     dispatch(requestMealsRecommendation());
     try {
-      const response = await recipesMealsApi(category);
+      const response = await recipesMealsApi();
       dispatch(responseMealsRecommendationSucess(response));
     } catch (error) {
       dispatch(responseMealsRecommendationError(error));
@@ -47,7 +48,7 @@ export function fetchRecommendationDrinks() {
   return async (dispatch) => {
     dispatch(requestDrinksRecommendation());
     try {
-      const response = await categoryDrinksFilterApi(category);
+      const response = await recipesDrinksApi();
       dispatch(responseDrinksRecommendationSucess(response));
     } catch (error) {
       dispatch(responseDrinksRecommendationError(error));
