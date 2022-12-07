@@ -38,9 +38,7 @@ function InProgressCard() {
   useEffect(() => {
     if (pathname.includes('/meals')) setPage('Meal');
     if (pathname.includes('/drinks')) setPage('Drink');
-    console.log('test');
-    console.log(ingredientList);
-  });
+  }, [pathname]);
   return (
     <div>
       <img
