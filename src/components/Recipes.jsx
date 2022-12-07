@@ -25,8 +25,7 @@ function Recipes() {
     if (pathname === '/meals') {
       dispatch(fetchRecipeMainMeals());
       dispatch(fetchRecipeCategoriesMeals());
-    } else
-    if (pathname === '/drinks') {
+    } else {
       dispatch(fetchRecipeMainDrinks());
       dispatch(fetchRecipeCategoriesDrinks());
     }
@@ -36,8 +35,7 @@ function Recipes() {
     let RECIPES;
     if (pathname === '/meals') {
       RECIPES = MEALS;
-    } else
-    if (pathname === '/drinks') {
+    } else {
       RECIPES = DRINKS;
     }
     return RECIPES;
@@ -47,8 +45,7 @@ function Recipes() {
     let CATEGORIES;
     if (pathname === '/meals') {
       CATEGORIES = MEALS_CATEGORIES;
-    } else
-    if (pathname === '/drinks') {
+    } else {
       CATEGORIES = DRINKS_CATEGORIES;
     }
     return CATEGORIES;
@@ -60,17 +57,15 @@ function Recipes() {
     if (categoryToggle === name) {
       if (pathname === '/meals') {
         return (dispatch(fetchRecipeMainMeals()));
-      } if (pathname === '/drinks') {
-        return (dispatch(fetchRecipeMainDrinks()));
       }
+      return (dispatch(fetchRecipeMainDrinks()));
     }
     setCategoryToggle(category);
     // ends toggle
     if (pathname === '/meals') {
       return (dispatch(fetchCategoryMealsFilter(category)));
-    } if (pathname === '/drinks') {
-      return (dispatch(fetchCategoryDrinksFilter(category)));
     }
+    return (dispatch(fetchCategoryDrinksFilter(category)));
   };
 
   return (
@@ -100,9 +95,8 @@ function Recipes() {
         onClick={ () => {
           if (pathname === '/meals') {
             return (dispatch(fetchRecipeMainMeals()));
-          } if (pathname === '/drinks') {
-            return (dispatch(fetchRecipeMainDrinks()));
           }
+          return (dispatch(fetchRecipeMainDrinks()));
         } }
       >
         All

@@ -22,7 +22,7 @@ function SearchBar() {
 
     if (pathname === '/meals') {
       dispatch(fetchMeals(radio, search, filter));
-    } else if (pathname === '/drinks') {
+    } else {
       dispatch(fetchDrinks(radio, search, filter));
     }
   };
