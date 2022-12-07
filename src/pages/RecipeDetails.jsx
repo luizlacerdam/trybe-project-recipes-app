@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/actions';
+import {
+  fetchRecommendationDrinks,
+  fetchRecommendationMeals } from '../redux/actions/actionsRecommendations';
 
 function RecipeDetails() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -17,9 +20,11 @@ function RecipeDetails() {
   useEffect(() => {
     if (pathname === `/meals/${id}`) {
       dispatch(fetchRecipeDetailsMeals(id));
+      dispatch(fetchRecommendationDrinks());
       setIsMeal(true);
     } else if (pathname === `/drinks/${id}`) {
       dispatch(fetchRecipeDetailsDrinks(id));
+      dispatch(fetchRecommendationMeals());
       setIsMeal(false);
     }
   }, []);
