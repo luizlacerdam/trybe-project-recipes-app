@@ -8,6 +8,7 @@ import fetch from '../../cypress/mocks/fetch';
 const AllButton = 'All-category-filter';
 const goatCategory = 'Goat-category-filter';
 const cocoaCategory = 'Cocoa-category-filter';
+const recipeTitle = 'recipe-title';
 
 describe('Testa a o componente Recipes.', () => {
   describe('1. Testa o componente Recipes em "/meals".', () => {
@@ -48,6 +49,16 @@ describe('Testa a o componente Recipes.', () => {
       userEvent.click(await screen.findByTestId(AllButton));
       expect(await screen.findByText('Corba')).toBeInTheDocument();
     });
+    test('1.5. Testa se ao clicar em um card de "/meals" é direcionado para a página do mesmo.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push('/meals'));
+      expect(await screen.findByText('Corba')).toBeInTheDocument();
+      userEvent.click(await screen.findByTestId('0-card-img'));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe('/meals/52977');
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('Spicy Arrabiata Penne');
+    });
   });
   describe('2. Testa o componente Recipes em "/drinks".', () => {
     beforeEach(() => {
@@ -86,6 +97,16 @@ describe('Testa a o componente Recipes.', () => {
       userEvent.click(await screen.findByTestId(cocoaCategory));
       userEvent.click(await screen.findByTestId(AllButton));
       expect(await screen.findByText('GG')).toBeInTheDocument();
+    });
+    test('2.5. Testa se ao clicar em um card de "/drinks" é direcionado para a página do mesmo.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push('/drinks'));
+      expect(await screen.findByText('GG')).toBeInTheDocument();
+      userEvent.click(await screen.findByTestId('0-card-img'));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe('/drinks/15997');
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('GG');
     });
   });
 });

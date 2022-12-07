@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function RecipesCard({ recipe, index, page }) {
   const imgThumbVerify = () => {
     let imgThumb;
     if (page === '/meals') {
       imgThumb = 'strMealThumb';
-    } else
-    if (page === '/drinks') {
+    } else {
       imgThumb = 'strDrinkThumb';
     }
     return imgThumb;
@@ -16,29 +16,42 @@ function RecipesCard({ recipe, index, page }) {
     let nameStr;
     if (page === '/meals') {
       nameStr = 'strMeal';
-    } else
-    if (page === '/drinks') {
+    } else {
       nameStr = 'strDrink';
     }
     return nameStr;
   };
 
-  return (
-    <div
-      data-testid={ `${index}-recipe-card` }
-    >
-      <img
-        data-testid={ `${index}-card-img` }
-        src={ recipe[imgThumbVerify()] }
-        alt=""
-      />
-      <div
-        data-testid={ `${index}-card-name` }
-      >
-        {recipe[nameStrVerify()]}
+  const idVerify = () => {
+    let id;
+    if (page === '/meals') {
+      id = 'idMeal';
+    } else {
+      id = 'idDrink';
+    }
+    return id;
+  };
 
+  return (
+    <Link
+      to={ `${page}/${recipe[idVerify()]}` }
+    >
+      <div
+        data-testid={ `${index}-recipe-card` }
+      >
+        <img
+          data-testid={ `${index}-card-img` }
+          src={ recipe[imgThumbVerify()] }
+          alt=""
+        />
+        <div
+          data-testid={ `${index}-card-name` }
+        >
+          {recipe[nameStrVerify()]}
+
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
