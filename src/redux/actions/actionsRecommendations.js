@@ -37,8 +37,13 @@ export function fetchRecommendationMeals() {
   return async (dispatch) => {
     dispatch(requestMealsRecommendation());
     try {
+      const limitRecommendations = 6;
+      const listDrinksRecommended = [];
       const response = await recipesMealsApi();
-      dispatch(responseMealsRecommendationSucess(response));
+      for (let index = 0; index < limitRecommendations; index += 1) {
+        listDrinksRecommended.push(response[index]);
+      }
+      dispatch(responseMealsRecommendationSucess(listDrinksRecommended));
     } catch (error) {
       dispatch(responseMealsRecommendationError(error));
     }
@@ -48,8 +53,13 @@ export function fetchRecommendationDrinks() {
   return async (dispatch) => {
     dispatch(requestDrinksRecommendation());
     try {
+      const limitRecommendations = 6;
+      const listMealsRecommended = [];
       const response = await recipesDrinksApi();
-      dispatch(responseDrinksRecommendationSucess(response));
+      for (let index = 0; index < limitRecommendations; index += 1) {
+        listMealsRecommended.push(response[index]);
+      }
+      dispatch(responseDrinksRecommendationSucess(listMealsRecommended));
     } catch (error) {
       dispatch(responseDrinksRecommendationError(error));
     }
