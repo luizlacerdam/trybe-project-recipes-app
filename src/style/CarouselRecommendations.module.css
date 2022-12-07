@@ -1,0 +1,17 @@
+.container_carousel {
+  border: 1px red solid;
+  display: flex;
+  overflow-x: auto;
+  padding: 0 10px;
+}
+
+.box_carousel {
+  border: 1px blue solid;
+  height: 300px;
+  width: 300px;
+}
+
+.Thumb {
+  height: 180px;
+  width: 180px;
+}

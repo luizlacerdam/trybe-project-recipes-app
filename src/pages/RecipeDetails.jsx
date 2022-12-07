@@ -6,6 +6,7 @@ import {
   fetchRecommendationDrinks,
   fetchRecommendationMeals } from '../redux/actions/actionsRecommendations';
 import StartRecipeButton from '../components/StartRecipeButton';
+import CarouselRecommendations from '../components/CarouselRecommendations';
 
 function RecipeDetails() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -83,6 +84,7 @@ function RecipeDetails() {
           /> }
         </div>
       )) }
+      <CarouselRecommendations />
       <StartRecipeButton />
     </div>
   );
