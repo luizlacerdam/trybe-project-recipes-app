@@ -1,0 +1,24 @@
+.done-recipe-card {
+  border: 1px solid gray;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.image-card {
+  border-radius: 6px 6px 0 0;
+  height: 100%;
+  width: 90%;
+}
+
+.done-recipe-card a {
+  color: black;
+  text-decoration: none;
+}
+
+.done-recipe-card p {
+  margin: 0;
+  margin-bottom: 10px;
+}
