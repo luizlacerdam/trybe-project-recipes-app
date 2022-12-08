@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import NavBarFavoritesRecipes from '../components/NavBarFavoritesRecipes';
 import { getFavoriteRecipeLocalStorage } from '../services/LocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import likeAndDeslike from '../images/blackHeartIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function FavoriteRecipes() {
+  const history = useHistory();
+  const [linkMsg, setLinkMsg] = useState('');
+  const { location: { pathname } } = history;
   const allFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+
+  const handleClickShared = () => {
+    setLinkMsg('Link copied!');
+    copy(`http://localhost:3000${pathname}`);
+  };
 
   return (
     <div>
@@ -29,11 +40,19 @@ function FavoriteRecipes() {
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {`${favorite.nationality} - ${favorite.category}`}
                 </p>
-                <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="Icon share"
-                />
+
+                <button
+                  type="button"
+                  name={ favorite.name }
+                  onClick={ handleClickShared }
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    src={ shareIcon }
+                    alt="Icon share"
+                  />
+                </button>
+                <span>{linkMsg}</span>
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   src={ likeAndDeslike }
@@ -53,11 +72,18 @@ function FavoriteRecipes() {
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {favorite.alcoholicOrNot}
                 </p>
-                <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="Icon share"
-                />
+                <button
+                  type="button"
+                  name={ favorite.name }
+                  onClick={ handleClickShared }
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    src={ shareIcon }
+                    alt="Icon share"
+                  />
+                </button>
+                <span>{linkMsg}</span>
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   src={ likeAndDeslike }
