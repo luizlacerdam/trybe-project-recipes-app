@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import NavBarFavoritesRecipes from '../components/NavBarFavoritesRecipes';
 import { getFavoriteRecipeLocalStorage } from '../services/LocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import likeAndDeslike from '../images/blackHeartIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function FavoriteRecipes() {
+  const [linkMsg, setLinkMsg] = useState('');
   const allFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+
+  const handleClickShared = ({ target }) => {
+    const { name, id } = target;
+    setLinkMsg('Link copied!');
+
+    if (name.includes('meal')) {
+      copy(`http://localhost:3000/meals/${id}`);
+    } else if (name.includes('drink')) {
+      copy(`http://localhost:3000/drinks/${id}`);
+    }
+  };
 
   return (
     <div>
@@ -29,16 +43,29 @@ function FavoriteRecipes() {
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {`${favorite.nationality} - ${favorite.category}`}
                 </p>
-                <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="Icon share"
-                />
-                <img
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  src={ likeAndDeslike }
-                  alt="Icon like and deslike"
-                />
+
+                <button
+                  type="button"
+                  onClick={ handleClickShared }
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    name={ `${favorite.name}-${favorite.type}` }
+                    id={ favorite.id }
+                    src={ shareIcon }
+                    alt="Icon share"
+                  />
+                </button>
+                <span>{linkMsg}</span>
+                <button
+                  type="button"
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ likeAndDeslike }
+                    alt="Icon like and deslike"
+                  />
+                </button>
               </div>)}
             {/* REQUISITO 52 - Caso a receita seja de uma bebida */}
             { favorite.type === 'drink'
@@ -53,16 +80,28 @@ function FavoriteRecipes() {
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {favorite.alcoholicOrNot}
                 </p>
-                <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="Icon share"
-                />
-                <img
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  src={ likeAndDeslike }
-                  alt="Icon like and deslike"
-                />
+                <button
+                  type="button"
+                  onClick={ handleClickShared }
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    name={ `${favorite.name}-${favorite.type}` }
+                    id={ favorite.id }
+                    src={ shareIcon }
+                    alt="Icon share"
+                  />
+                </button>
+                <span>{linkMsg}</span>
+                <button
+                  type="button"
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ likeAndDeslike }
+                    alt="Icon like and deslike"
+                  />
+                </button>
               </div>)}
           </div>
         ))}
