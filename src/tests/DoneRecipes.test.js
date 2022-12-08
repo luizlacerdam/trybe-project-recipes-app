@@ -40,5 +40,10 @@ describe('Testes do componente <DoneRecipes />', () => {
     userEvent.click(image);
     const image2 = screen.getByTestId('1-horizontal-image');
     userEvent.click(image2);
+    window.document.execCommand = jest.fn(() => true);
+    const shareButton = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(shareButton);
+    const shareButton2 = screen.getByTestId('1-horizontal-share-btn');
+    userEvent.click(shareButton2);
   });
 });
