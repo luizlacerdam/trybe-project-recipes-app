@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { saveUser } from '../redux/actions';
-import saveEmailLocalStorage from '../services/LocalStorage';
+import { saveEmailLocalStorage } from '../services/LocalStorage';
 
 function Login() {
   const [email, setEmail] = useState('');
