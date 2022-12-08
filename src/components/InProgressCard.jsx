@@ -52,6 +52,10 @@ function InProgressCard() {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem('test', 'test');
+  }, [pathname]);
+
   return (
     <div>
       <img

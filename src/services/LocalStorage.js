@@ -3,7 +3,7 @@ export const saveEmailLocalStorage = (data) => {
 };
 
 export const saveInProgressRecipeLocalStorage = (type, idType, ingredients) => {
-  if (type === 'meals') {
+  if (type === 'meal') {
     localStorage
       .setItem('inProgressRecipes', JSON.stringify(
         {
@@ -12,12 +12,12 @@ export const saveInProgressRecipeLocalStorage = (type, idType, ingredients) => {
           },
         },
       ));
-  } else if (typeRecipe === 'drink') {
+  } else if (type === 'drink') {
     localStorage
       .setItem('inProgressRecipes', JSON.stringify(
         {
           drinks: {
-            idType: ingredients,
+            [idType]: ingredients,
           },
         },
       ));

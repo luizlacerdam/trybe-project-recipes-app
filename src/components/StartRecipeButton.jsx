@@ -28,11 +28,12 @@ function StartRecipeButton() {
 
   const handleClick = () => {
     if (pathname.includes('meals')) {
-      saveInProgressRecipeLocalStorage('meals', recipeMeal[0].idMeal, ingredientsList);
+      saveInProgressRecipeLocalStorage('meal', recipeMeal[0].idMeal, ingredientsList);
     } else if (pathname.includes('drinks')) {
-      saveInProgressRecipeLocalStorage('drinks', recipeDrink[0].idMeal, ingredientsList);
+      saveInProgressRecipeLocalStorage('drink', recipeDrink[0].idDrink, ingredientsList);
     }
     setRecipeInProgress(true);
+    history.push(`${pathname}/in-progress`);
   };
 
   useEffect(() => {
