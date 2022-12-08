@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import NavBarFavoritesRecipes from '../components/NavBarFavoritesRecipes';
-import { getFavoriteRecipeLocalStorage } from '../services/LocalStorage';
+import {
+  getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
+} from '../services/LocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import likeAndDeslike from '../images/blackHeartIcon.svg';
 
@@ -9,7 +11,13 @@ const copy = require('clipboard-copy');
 
 function FavoriteRecipes() {
   const [linkMsg, setLinkMsg] = useState('');
+  const [favoriteRecipes, setFavoriteRecipes] = useState({});
   const allFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+
+  useEffect(() => {
+    const attFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+    setFavoriteRecipes(attFavoriteRecipes);
+  }, []);
 
   const handleClickShared = ({ target }) => {
     const { name, id } = target;
@@ -20,6 +28,14 @@ function FavoriteRecipes() {
     } else if (name.includes('drink')) {
       copy(`http://localhost:3000/drinks/${id}`);
     }
+  };
+
+  const handleDeslikeRecipe = ({ target }) => {
+    const { id } = target;
+    console.log(id);
+    const upDateFavoriteRecipesLocalStorage = allFavoriteRecipes
+      .filter((favorite) => favorite.id !== id);
+    saveFavoriteRecipesLocalStorage(upDateFavoriteRecipesLocalStorage);
   };
 
   return (
@@ -59,9 +75,11 @@ function FavoriteRecipes() {
                 <span>{linkMsg}</span>
                 <button
                   type="button"
+                  onClick={ handleDeslikeRecipe }
                 >
                   <img
                     data-testid={ `${index}-horizontal-favorite-btn` }
+                    id={ favorite.id }
                     src={ likeAndDeslike }
                     alt="Icon like and deslike"
                   />
@@ -95,9 +113,11 @@ function FavoriteRecipes() {
                 <span>{linkMsg}</span>
                 <button
                   type="button"
+                  onClick={ handleDeslikeRecipe }
                 >
                   <img
                     data-testid={ `${index}-horizontal-favorite-btn` }
+                    id={ favorite.id }
                     src={ likeAndDeslike }
                     alt="Icon like and deslike"
                   />
