@@ -33,7 +33,7 @@ function DoneRecipes() {
 
   return (
     <div className="done-recipe-card">
-      <Header title="Done Recipes" searchButton={ false } />
+      <Header title="Done Recipes" showSearchButton={ false } />
       <button
         type="button"
         data-testid="filter-by-all-btn"

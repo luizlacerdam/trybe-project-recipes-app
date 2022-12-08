@@ -38,9 +38,7 @@ describe('Testes do componente <DoneRecipes />', () => {
     userEvent.click(allFillterBtn);
     const image = screen.getByTestId('0-horizontal-image');
     userEvent.click(image);
-    const image2 = screen.getByTestId('0-horizontal-image');
+    const image2 = screen.getByTestId('1-horizontal-image');
     userEvent.click(image2);
-    const shareButton = screen.getByTestId('0-horizontal-share-btn');
-    userEvent.click(shareButton);
   });
 });
