@@ -23,3 +23,8 @@ export const saveInProgressRecipeLocalStorage = (type, idType, ingredients) => {
       ));
   }
 };
+
+export const getFavoriteRecipeLocalStorage = (param) => {
+  const favoriteRecipe = JSON.parse(localStorage.getItem(param));
+  return favoriteRecipe;
+};
