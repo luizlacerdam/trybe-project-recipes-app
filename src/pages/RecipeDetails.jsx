@@ -42,12 +42,11 @@ function RecipeDetails() {
     let recipeProp;
     if (pathname === `/meals/${id}`) {
       recipeProp = recipeDetailMeal;
-     
-    } else  {
+    } else {
       recipeProp = recipeDetailDrink;
     }
     return recipeProp[0];
-  }
+  };
   const ingredientsList = recipeDetail.map((element) => Object.entries(element)
     .filter((elem) => elem[0].includes('strIngredient')
     && elem[1] !== ''
@@ -61,13 +60,13 @@ function RecipeDetails() {
     && elem[1] !== ' '
     && elem[1] !== null)
     .map((ingredients) => ingredients[1])).flat();
-  
+
   return (
     <div>
       <h1>Recipes Details</h1>
       <h3>Card Recipes Details</h3>
       <ShareButton />
-      <FavoriteButton recipeProp={handleRecipeProp()}/>
+      <FavoriteButton recipeProp={ handleRecipeProp() } />
       { recipeDetail.map((recipe, index) => (
         <div key={ index }>
           <img
