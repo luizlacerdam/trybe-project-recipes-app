@@ -7,6 +7,8 @@ import {
   fetchRecommendationMeals } from '../redux/actions/actionsRecommendations';
 import StartRecipeButton from '../components/StartRecipeButton';
 import CarouselRecommendations from '../components/CarouselRecommendations';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 function RecipeDetails() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -55,6 +57,8 @@ function RecipeDetails() {
     <div>
       <h1>Recipes Details</h1>
       <h3>Card Recipes Details</h3>
+      <ShareButton />
+      <FavoriteButton />
       { recipeDetail.map((recipe, index) => (
         <div key={ index }>
           <img
