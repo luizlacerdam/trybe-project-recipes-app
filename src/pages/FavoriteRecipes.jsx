@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import NavBarFavoritesRecipes from '../components/NavBarFavoritesRecipes';
-import { getFavoriteRecipeLocalStorage } from '../services/LocalStorage';
+import {
+  getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
+} from '../services/LocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import likeAndDeslike from '../images/blackHeartIcon.svg';
 
@@ -9,12 +11,12 @@ const copy = require('clipboard-copy');
 
 function FavoriteRecipes() {
   const [linkMsg, setLinkMsg] = useState('');
-  const allFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [controller, setController] = useState(false);
 
   const handleClickShared = ({ target }) => {
     const { name, id } = target;
     setLinkMsg('Link copied!');
-
     if (name.includes('meal')) {
       copy(`http://localhost:3000/meals/${id}`);
     } else if (name.includes('drink')) {
@@ -22,13 +24,26 @@ function FavoriteRecipes() {
     }
   };
 
+  const handleDeslikeRecipe = ({ target }) => {
+    const { id } = target;
+    const upDateFavoriteRecipesLocalStorage = favoriteRecipes
+      .filter((favorite) => favorite.id !== id);
+    saveFavoriteRecipesLocalStorage(upDateFavoriteRecipesLocalStorage);
+    setController(!controller);
+  };
+
+  useEffect(() => {
+    const newFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+    setFavoriteRecipes(newFavoriteRecipes);
+  }, [controller]);
+
   return (
     <div>
       <Header title="Favorite Recipes" searchButton={ false } />
       <p>Favorite Recipes</p>
       <NavBarFavoritesRecipes />
       <div>
-        {allFavoriteRecipes.map((favorite, index) => (
+        {favoriteRecipes.map((favorite, index) => (
           <div key={ index }>
             {/* REQUISITO 51 - Caso a receita seja de uma comida */}
             { favorite.type === 'meal'
@@ -59,9 +74,11 @@ function FavoriteRecipes() {
                 <span>{linkMsg}</span>
                 <button
                   type="button"
+                  onClick={ handleDeslikeRecipe }
                 >
                   <img
                     data-testid={ `${index}-horizontal-favorite-btn` }
+                    id={ favorite.id }
                     src={ likeAndDeslike }
                     alt="Icon like and deslike"
                   />
@@ -95,9 +112,11 @@ function FavoriteRecipes() {
                 <span>{linkMsg}</span>
                 <button
                   type="button"
+                  onClick={ handleDeslikeRecipe }
                 >
                   <img
                     data-testid={ `${index}-horizontal-favorite-btn` }
+                    id={ favorite.id }
                     src={ likeAndDeslike }
                     alt="Icon like and deslike"
                   />
