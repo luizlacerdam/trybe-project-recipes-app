@@ -11,18 +11,12 @@ const copy = require('clipboard-copy');
 
 function FavoriteRecipes() {
   const [linkMsg, setLinkMsg] = useState('');
-  const [favoriteRecipes, setFavoriteRecipes] = useState({});
-  const allFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
-
-  useEffect(() => {
-    const attFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
-    setFavoriteRecipes(attFavoriteRecipes);
-  }, []);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [controller, setController] = useState(false);
 
   const handleClickShared = ({ target }) => {
     const { name, id } = target;
     setLinkMsg('Link copied!');
-
     if (name.includes('meal')) {
       copy(`http://localhost:3000/meals/${id}`);
     } else if (name.includes('drink')) {
@@ -32,11 +26,16 @@ function FavoriteRecipes() {
 
   const handleDeslikeRecipe = ({ target }) => {
     const { id } = target;
-    console.log(id);
-    const upDateFavoriteRecipesLocalStorage = allFavoriteRecipes
+    const upDateFavoriteRecipesLocalStorage = favoriteRecipes
       .filter((favorite) => favorite.id !== id);
     saveFavoriteRecipesLocalStorage(upDateFavoriteRecipesLocalStorage);
+    setController(!controller);
   };
+
+  useEffect(() => {
+    const newFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+    setFavoriteRecipes(newFavoriteRecipes);
+  }, [controller]);
 
   return (
     <div>
@@ -44,7 +43,7 @@ function FavoriteRecipes() {
       <p>Favorite Recipes</p>
       <NavBarFavoritesRecipes />
       <div>
-        {allFavoriteRecipes.map((favorite, index) => (
+        {favoriteRecipes.map((favorite, index) => (
           <div key={ index }>
             {/* REQUISITO 51 - Caso a receita seja de uma comida */}
             { favorite.type === 'meal'
