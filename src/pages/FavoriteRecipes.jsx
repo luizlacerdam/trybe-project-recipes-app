@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import NavBarFavoritesRecipes from '../components/NavBarFavoritesRecipes';
 import {
   getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
 } from '../services/LocalStorage';
@@ -12,7 +11,14 @@ const copy = require('clipboard-copy');
 function FavoriteRecipes() {
   const [linkMsg, setLinkMsg] = useState('');
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [allFavoriteRecipes, setAllFavoriteRecipes] = useState([]);
   const [controller, setController] = useState(false);
+
+  useEffect(() => {
+    const newFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
+    setFavoriteRecipes(newFavoriteRecipes);
+    setAllFavoriteRecipes(newFavoriteRecipes);
+  }, [controller]);
 
   const handleClickShared = ({ target }) => {
     const { name, id } = target;
@@ -32,16 +38,45 @@ function FavoriteRecipes() {
     setController(!controller);
   };
 
-  useEffect(() => {
-    const newFavoriteRecipes = getFavoriteRecipeLocalStorage('favoriteRecipes');
-    setFavoriteRecipes(newFavoriteRecipes);
-  }, [controller]);
+  const handleFilterMeals = () => {
+    const filtredMealsFavorite = favoriteRecipes
+      .filter((favoriteRecipe) => favoriteRecipe.type === 'meal');
+    setFavoriteRecipes(filtredMealsFavorite);
+  };
+
+  const handleFilterDrinks = () => {
+    const filtredDrinksFavorite = favoriteRecipes
+      .filter((favoriteRecipe) => favoriteRecipe.type === 'drink');
+    setFavoriteRecipes(filtredDrinksFavorite);
+  };
 
   return (
     <div>
       <Header title="Favorite Recipes" searchButton={ false } />
       <p>Favorite Recipes</p>
-      <NavBarFavoritesRecipes />
+      <div>
+        <button
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ () => setFavoriteRecipes(allFavoriteRecipes) }
+        >
+          All
+        </button>
+        <button
+          data-testid="filter-by-meal-btn"
+          type="button"
+          onClick={ handleFilterMeals }
+        >
+          Meals
+        </button>
+        <button
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ handleFilterDrinks }
+        >
+          Drinks
+        </button>
+      </div>
       <div>
         {favoriteRecipes.map((favorite, index) => (
           <div key={ index }>
