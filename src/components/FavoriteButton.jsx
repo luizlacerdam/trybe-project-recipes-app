@@ -1,18 +1,29 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FavoriteButton({ recipeProp }) {
   const history = useHistory();
   const { location: { pathname } } = history;
+  const [favorites, setFavorites] = useState(false);
+  const isPageMeal = pathname.includes('meals');
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
+  const isFavorite = () => {
+    const isFavorited = favoriteRecipes.some((recipe) => recipe.id === recipeProp.idMeal
+    || recipe.id === recipeProp.idDrink);
+    setFavorites(isFavorited);
+  };
+
+  useEffect(() => {
+    isFavorite();
+  });
 
   const handleButton = () => {
-    if (localStorage.getItem('favoriteRecipes') === null) {
-      localStorage.setItem('favoriteRecipes', '[]');
-    }
-    const arr = JSON.parse(localStorage.favoriteRecipes);
     let newObj;
-    if (pathname.includes('meals')) {
+    if (isPageMeal) {
       newObj = {
         id: recipeProp.idMeal,
         type: 'meal',
@@ -33,17 +44,19 @@ function FavoriteButton({ recipeProp }) {
         image: recipeProp.strDrinkThumb,
       };
     }
-    arr.push(newObj);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(arr));
+    favoriteRecipes.push(newObj);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    isFavorite();
   };
-  console.log(recipeProp);
+
   return (
     <button
       type="button"
       data-testid="favorite-btn"
       onClick={ handleButton }
+      src={ favorites ? blackHeartIcon : whiteHeartIcon }
     >
-      FAVORITE
+      <img src={ favorites ? blackHeartIcon : whiteHeartIcon } alt="favorite-icon" />
     </button>
   );
 }
