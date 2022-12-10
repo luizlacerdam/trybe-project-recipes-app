@@ -119,7 +119,7 @@ function FavoriteRecipes() {
                   alt="Icon share"
                 />
               </button>
-              <span>{linkMsg}</span>
+              <span data-testid="msgLinkCopied">{linkMsg}</span>
               <button
                 type="button"
                 onClick={ handleDeslikeRecipe }
