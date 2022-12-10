@@ -54,22 +54,15 @@ describe('Testes pagina de receitas favoritas.', () => {
     expect(history.location.pathname).toBe('/meals/52977');
   });
 
-  // it('3) Verifica se ao clicar em compartilhar, o link da pagina de detalhes é copiado.', () => {
-  //   renderWithRouterAndRedux(<FavoriteRecipes />);
+  it('3) Verifica se ao clicar em compartilhar, o link da pagina de detalhes é copiado.', () => {
+    renderWithRouterAndRedux(<FavoriteRecipes />);
 
-  //   const btnShareMeals = screen.getByTestId('0-horizontal-share-btn');
-  //   expect(btnShareMeals).toBeInTheDocument();
-  //   userEvent.click(btnShareMeals);
-  //   const mealsLinkCopied = screen.getByTestId('msgLinkCopied');
-  //   expect(mealsLinkCopied).toBeInTheDocument();
-
-  //   const btnShareDrink = screen.getByTestId('1-horizontal-share-btn');
-  //   expect(btnShareDrink).toBeInTheDocument();
-  //   userEvent.click(btnShareDrink);
-  //   const textlinkCopied = screen.getByTestId('msgLinkCopied');
-  //   expect(textlinkCopied).toBeInTheDocument();
-  //
-  // });
+    window.document.execCommand = jest.fn(() => true);
+    const shareButton = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(shareButton);
+    const shareButton2 = screen.getByTestId('1-horizontal-share-btn');
+    userEvent.click(shareButton2);
+  });
 
   it('4) Verifica se ao clicar no filtro é listado apenas o que foi solicitado.', () => {
     renderWithRouterAndRedux(<FavoriteRecipes />);
