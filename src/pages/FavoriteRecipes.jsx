@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import {
   getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
@@ -84,12 +85,16 @@ function FavoriteRecipes() {
             { favorite.type === 'meal'
             && (
               <div>
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ favorite.image }
-                  alt="favorite.name"
-                />
-                <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
+                <Link to={ `/meals/${favorite.id}` }>
+                  <img
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ favorite.image }
+                    alt="favorite.name"
+                  />
+                </Link>
+                <Link to={ `/meals/${favorite.id}` }>
+                  <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
+                </Link>
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {`${favorite.nationality} - ${favorite.category}`}
                 </p>
@@ -123,12 +128,16 @@ function FavoriteRecipes() {
             { favorite.type === 'drink'
             && (
               <div>
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ favorite.image }
-                  alt="favorite.name"
-                />
-                <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
+                <Link to={ `/drinks/${favorite.id}` }>
+                  <img
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ favorite.image }
+                    alt="favorite.name"
+                  />
+                </Link>
+                <Link to={ `/drinks/${favorite.id}` }>
+                  <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
+                </Link>
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {favorite.alcoholicOrNot}
                 </p>
