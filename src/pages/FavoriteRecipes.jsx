@@ -78,7 +78,7 @@ function FavoriteRecipes() {
         </button>
       </div>
       <div>
-        {favoriteRecipes.map((favorite, index) => (
+        {!favoriteRecipes ? '' : favoriteRecipes.map((favorite, index) => (
           <div key={ index }>
             {/* REQUISITO 51 - Caso a receita seja de uma comida */}
             { favorite.type === 'meal'
