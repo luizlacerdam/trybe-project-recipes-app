@@ -68,6 +68,7 @@ describe('Testes pagina de receitas favoritas.', () => {
   //   userEvent.click(btnShareDrink);
   //   const textlinkCopied = screen.getByTestId('msgLinkCopied');
   //   expect(textlinkCopied).toBeInTheDocument();
+  //
   // });
 
   it('4) Verifica se ao clicar no filtro é listado apenas o que foi solicitado.', () => {
