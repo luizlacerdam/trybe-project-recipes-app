@@ -22,31 +22,43 @@ function FavoriteButton({ recipeProp }) {
   });
 
   const handleButton = () => {
-    let newObj;
-    if (isPageMeal) {
-      newObj = {
-        id: recipeProp.idMeal,
-        type: 'meal',
-        nationality: recipeProp.strArea,
-        category: recipeProp.strCategory,
-        alcoholicOrNot: '',
-        name: recipeProp.strMeal,
-        image: recipeProp.strMealThumb,
-      };
+    if (favoriteRecipes.some((recipe) => recipe.id === recipeProp.idMeal
+    || recipe.id === recipeProp.idDrink)) {
+      let newArray;
+      if (isPageMeal) {
+        newArray = favoriteRecipes.filter((elem) => elem.id !== recipeProp.idMeal);
+      } else {
+        newArray = favoriteRecipes.filter((elem) => elem.id !== recipeProp.idDrink);
+      }
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newArray));
+      setFavorites(false);
     } else {
-      newObj = {
-        id: recipeProp.idDrink,
-        type: 'drink',
-        nationality: '',
-        category: recipeProp.strCategory,
-        alcoholicOrNot: recipeProp.strAlcoholic,
-        name: recipeProp.strDrink,
-        image: recipeProp.strDrinkThumb,
-      };
+      let newObj;
+      if (isPageMeal) {
+        newObj = {
+          id: recipeProp.idMeal,
+          type: 'meal',
+          nationality: recipeProp.strArea,
+          category: recipeProp.strCategory,
+          alcoholicOrNot: '',
+          name: recipeProp.strMeal,
+          image: recipeProp.strMealThumb,
+        };
+      } else {
+        newObj = {
+          id: recipeProp.idDrink,
+          type: 'drink',
+          nationality: '',
+          category: recipeProp.strCategory,
+          alcoholicOrNot: recipeProp.strAlcoholic,
+          name: recipeProp.strDrink,
+          image: recipeProp.strDrinkThumb,
+        };
+      }
+      favoriteRecipes.push(newObj);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+      isFavorite();
     }
-    favoriteRecipes.push(newObj);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-    isFavorite();
   };
 
   return (
