@@ -7,6 +7,7 @@ import {
   REQUEST_DRINKS_RECOMMENDATION,
   RESPONSE_DRINKS_RECOMMENDATION_SUCCESS,
   RESPONSE_DRINKS_RECOMMENDATION_ERROR,
+  SAVE_CURRENT_RECIPE,
 } from './actionsTypes';
 
 export const requestMealsRecommendation = () => ({
@@ -66,3 +67,10 @@ export function fetchRecommendationDrinks() {
   };
 }
 // <--------------------- Thunk page of recommendation --------------------->
+
+// <--------------------- actions of currentRecipe --------------------->
+
+export const saveCurrentRecipe = (currentRecipe) => ({
+  type: SAVE_CURRENT_RECIPE,
+  currentRecipe,
+});

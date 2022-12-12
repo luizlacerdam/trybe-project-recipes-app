@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import CarouselRecommendations from '../components/CarouselRecommendations';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
+import StartRecipeButton from '../components/StartRecipeButton';
 import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/actions';
 import {
   fetchRecommendationDrinks,
-  fetchRecommendationMeals } from '../redux/actions/actionsRecommendations';
-import StartRecipeButton from '../components/StartRecipeButton';
-import CarouselRecommendations from '../components/CarouselRecommendations';
-import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
+  fetchRecommendationMeals,
+  saveCurrentRecipe,
+} from '../redux/actions/actionsRecommendations';
 
 function RecipeDetails() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -20,6 +22,7 @@ function RecipeDetails() {
   const { id } = mealsOrDrinkId;
   const { location: { pathname } } = history;
   let recipeDetail = [];
+
   useEffect(() => {
     if (pathname === `/meals/${id}`) {
       dispatch(fetchRecipeDetailsMeals(id));
@@ -31,6 +34,14 @@ function RecipeDetails() {
       setIsMeal(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (pathname === `/meals/${id}`) {
+      dispatch(saveCurrentRecipe(recipeDetailMeal));
+    } else if (pathname === `/drinks/${id}`) {
+      dispatch(saveCurrentRecipe(recipeDetailDrink));
+    }
+  }, [recipeDetailDrink, recipeDetailMeal]);
 
   if (pathname === `/meals/${id}`) {
     recipeDetail = recipeDetailMeal;
