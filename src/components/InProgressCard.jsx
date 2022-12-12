@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/actions';
+import { saveCurrentRecipe } from '../redux/actions/actionsRecommendations';
 import '../styles/RecipeInProgress.css';
 
 function InProgressCard() {
-  // const currentRecipe = useSelector((state) => state.inProgress.current);
-  const currentRecipe = [{ strDrink: 'Aquamarine',
-    strCategory: 'Cocktail',
-    strInstructions: 'Shake well in a shaker with ice. Strain in a martini glass.',
-    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    strIngredient1: 'Hpnotiq',
-    strIngredient2: 'Pineapple Juice',
-    strIngredient3: 'Banana Liqueur',
-    strIngredient4: null,
-    strIngredient5: null,
-    strIngredient6: null,
-    strIngredient7: null,
-    strIngredient8: null,
-    strIngredient9: null,
-    strIngredient10: null,
-    strIngredient11: null,
-    strIngredient12: null,
-    strIngredient13: null,
-    strIngredient14: null,
-    strIngredient15: null }];
+  const currentRecipe = useSelector((state) => state.recipeInProgress.currentRecipe);
   const [checkList, setCheckList] = useState([]);
   const getIngredients = () => {
     const result = currentRecipe.map((element) => Object.entries(element)
@@ -36,53 +20,94 @@ function InProgressCard() {
   const ingredientList = getIngredients();
   const [page, setPage] = useState('');
   const history = useHistory();
+  const dispatch = useDispatch();
   const { location: { pathname } } = history;
+  const mealsOrDrinkId = useParams('/meals/:id/in-progress');
+  const { id } = mealsOrDrinkId;
+  const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
+  const recipeDetailDrink = useSelector((globalState) => globalState.drinks.recipeDrinks);
+
   useEffect(() => {
-    if (pathname.includes('/meals')) setPage('Meal');
-    if (pathname.includes('/drinks')) setPage('Drink');
-  }, [pathname]);
+    const getPage = () => {
+      if (pathname.includes('meals')) {
+        setPage('Meal');
+        dispatch(fetchRecipeDetailsMeals(id));
+      } else if (pathname.includes('drinks')) {
+        setPage('Drink');
+        dispatch(fetchRecipeDetailsDrinks(id));
+      }
+    };
+    getPage();
+    const savedCheckList = JSON.parse(localStorage.getItem(id));
+    if (savedCheckList) localStorage.removeItem(id);
+    if (savedCheckList !== null) setCheckList(savedCheckList);
+  }, [id]);
 
   const handleChange = ({ target }) => {
     const { name, checked } = target;
     if (checked === true) setCheckList([...checkList, name]);
     if (checked === false) {
       const result = checkList.filter((element) => element !== name);
-      console.log(result);
       setCheckList([...result]);
     }
   };
 
+  useEffect(() => {
+    if (pathname.includes('/meals')) {
+      dispatch(saveCurrentRecipe(recipeDetailMeal));
+      setPage('Meal');
+    } else if (pathname.includes('/drinks')) {
+      dispatch(saveCurrentRecipe(recipeDetailDrink));
+      setPage('Drink');
+    }
+  }, [recipeDetailDrink, recipeDetailMeal]);
+
+  useEffect(() => {
+    localStorage.setItem(id, JSON.stringify(checkList));
+  }, [checkList]);
+
   return (
     <div>
-      <img
-        data-testid="recipe-photo"
-        src={ currentRecipe[0][`str${page}Thumb`] }
-        alt="Thumb"
-      />
-      <h1 data-testid="recipe-title">{currentRecipe[0][`str${page}`]}</h1>
-      <button data-testid="share-btn" type="button">Share</button>
-      <button data-testid="favorite-btn" type="button">Favorite</button>
-      <h2 data-testid="recipe-category">{currentRecipe[0].strCategory}</h2>
-      <p data-testid="instructions">{currentRecipe[0].strInstructions}</p>
-      <button data-testid="finish-recipe-btn" type="button">Done</button>
-      <div>
-        {ingredientList.map((ingredient, index) => (
-          <label
-            data-testid={ `${index}-ingredient-step` }
-            key={ `ingredient-${index}` }
-            htmlFor={ `ingredient-${index}` }
-            className={ checkList.includes(ingredient) ? 'checked' : '' }
+      {currentRecipe.map((recipe) => (
+        <div key={ id }>
+          <img
+            data-testid="recipe-photo"
+            src={ page === 'Meal' ? recipe.strMealThumb
+              : recipe.strDrinkThumb }
+            alt="Thumb"
+          />
+          <h1
+            data-testid="recipe-title"
           >
-            <input
-              type="checkbox"
-              name={ ingredient }
-              id={ `ingredient-${index}` }
-              onChange={ handleChange }
-            />
-            { ingredient }
-          </label>
-        ))}
-      </div>
+            { page === 'Meal' ? recipe.strMeal
+              : recipe.strDrink }
+          </h1>
+          <button data-testid="share-btn" type="button">Share</button>
+          <button data-testid="favorite-btn" type="button">Favorite</button>
+          <h2 data-testid="recipe-category">{recipe.strCategory}</h2>
+          <p data-testid="instructions">{recipe.strInstructions}</p>
+          <button data-testid="finish-recipe-btn" type="button">Done</button>
+          <div>
+            {ingredientList.map((ingredient, index) => (
+              <label
+                data-testid={ `${index}-ingredient-step` }
+                key={ `ingredient-${index}` }
+                htmlFor={ `ingredient-${index}` }
+                className={ checkList.includes(ingredient) ? 'checked' : '' }
+              >
+                <input
+                  type="checkbox"
+                  name={ ingredient }
+                  id={ `ingredient-${index}` }
+                  onChange={ handleChange }
+                  checked={ checkList.includes(ingredient) }
+                />
+                { ingredient }
+              </label>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

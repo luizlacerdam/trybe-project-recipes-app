@@ -4,7 +4,6 @@ import InProgressCard from '../components/InProgressCard';
 function InProgressRecipe() {
   return (
     <div>
-      <p>Inicio</p>
       <InProgressCard />
     </div>
   );
