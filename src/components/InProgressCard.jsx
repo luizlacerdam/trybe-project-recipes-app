@@ -26,6 +26,7 @@ function InProgressCard() {
   const { id } = mealsOrDrinkId;
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
   const recipeDetailDrink = useSelector((globalState) => globalState.drinks.recipeDrinks);
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     const getPage = () => {
@@ -64,6 +65,8 @@ function InProgressCard() {
 
   useEffect(() => {
     localStorage.setItem(id, JSON.stringify(checkList));
+    if (checkList.length === ingredientList.length) setDisabled(false);
+    if (checkList.length !== ingredientList.length) setDisabled(true);
   }, [checkList]);
 
   return (
@@ -86,7 +89,13 @@ function InProgressCard() {
           <button data-testid="favorite-btn" type="button">Favorite</button>
           <h2 data-testid="recipe-category">{recipe.strCategory}</h2>
           <p data-testid="instructions">{recipe.strInstructions}</p>
-          <button data-testid="finish-recipe-btn" type="button">Done</button>
+          <button
+            disabled={ disabled }
+            data-testid="finish-recipe-btn"
+            type="button"
+          >
+            Done
+          </button>
           <div>
             {ingredientList.map((ingredient, index) => (
               <label
