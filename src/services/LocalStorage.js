@@ -8,7 +8,7 @@ export const saveInProgressRecipeLocalStorage = (type, idType, ingredients) => {
       .setItem('inProgressRecipes', JSON.stringify(
         {
           meals: {
-            idType: ingredients,
+            [idType]: ingredients,
           },
         },
       ));
