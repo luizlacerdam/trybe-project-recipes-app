@@ -34,7 +34,7 @@ function InProgressCard() {
       if (pathname.includes('meals')) {
         setPage('Meal');
         dispatch(fetchRecipeDetailsMeals(id));
-      } else if (pathname.includes('drinks')) {
+      } else {
         setPage('Drink');
         dispatch(fetchRecipeDetailsDrinks(id));
       }
@@ -58,7 +58,7 @@ function InProgressCard() {
     if (pathname.includes('/meals')) {
       dispatch(saveCurrentRecipe(recipeDetailMeal));
       setPage('Meal');
-    } else if (pathname.includes('/drinks')) {
+    } else {
       dispatch(saveCurrentRecipe(recipeDetailDrink));
       setPage('Drink');
     }
@@ -69,9 +69,6 @@ function InProgressCard() {
     if (checkList.length === ingredientList.length) setDisabled(false);
     if (checkList.length !== ingredientList.length) setDisabled(true);
   }, [checkList]);
-
-  const test = currentRecipe[0];
-  console.log(test);
 
   const saveObject = currentRecipe.map((recipe) => (
     {
@@ -92,8 +89,6 @@ function InProgressCard() {
     localStorage.setItem('doneRecipes', JSON.stringify(saveObject));
     history.push('/done-recipes');
   };
-
-  console.log(currentRecipe);
 
   return (
     <div>
