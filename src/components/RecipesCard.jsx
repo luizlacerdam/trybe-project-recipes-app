@@ -42,7 +42,8 @@ function RecipesCard({ recipe, index, page }) {
         <img
           data-testid={ `${index}-card-img` }
           src={ recipe[imgThumbVerify()] }
-          alt=""
+          alt={ recipe[nameStrVerify()] }
+          className="recipe-image"
         />
         <div
           data-testid={ `${index}-card-name` }

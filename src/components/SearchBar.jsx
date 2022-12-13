@@ -74,7 +74,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="search-bar">
       <input
         data-testid="search-input"
         onChange={
@@ -82,40 +82,43 @@ function SearchBar() {
         }
         value={ apiRequest.search }
         type="text"
+        className="search-input"
       />
-      <label htmlFor="ingredient">
-        <input
-          value="i"
-          data-testid="ingredient-search-radio"
-          type="radio"
-          id="ingredient"
-          onClick={ handleRadio }
-          name="radio"
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name">
-        <input
-          value="s"
-          onClick={ handleRadio }
-          name="radio"
-          data-testid="name-search-radio"
-          type="radio"
-          id="name"
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter">
-        <input
-          value="f"
-          name="radio"
-          data-testid="first-letter-search-radio"
-          type="radio"
-          id="first-letter"
-          onClick={ handleRadio }
-        />
-        First Letter
-      </label>
+      <div className="search-type">
+        <label htmlFor="ingredient">
+          <input
+            value="i"
+            data-testid="ingredient-search-radio"
+            type="radio"
+            id="ingredient"
+            onClick={ handleRadio }
+            name="radio"
+          />
+          Ingredient
+        </label>
+        <label htmlFor="name">
+          <input
+            value="s"
+            onClick={ handleRadio }
+            name="radio"
+            data-testid="name-search-radio"
+            type="radio"
+            id="name"
+          />
+          Name
+        </label>
+        <label htmlFor="first-letter">
+          <input
+            value="f"
+            name="radio"
+            data-testid="first-letter-search-radio"
+            type="radio"
+            id="first-letter"
+            onClick={ handleRadio }
+          />
+          First Letter
+        </label>
+      </div>
       <button
         onClick={ doSearch }
         data-testid="exec-search-btn"

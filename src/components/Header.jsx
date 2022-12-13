@@ -19,27 +19,31 @@ function Header(props) {
   };
 
   return (
-    <div>
-      <button onClick={ handleClick } type="button">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="SVG"
-        />
-      </button>
-      <h1 data-testid="page-title">{title}</h1>
-      {!searching ? '' : (
-        <SearchBar />
-      )}
-      {!searchButton ? '' : (
-        <button onClick={ isSeaching } type="button">
+    <div className="header">
+      <div className="up-header">
+        {!searchButton ? '' : (
+          <button onClick={ isSeaching } type="button">
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="SVG"
+            />
+          </button>
+        )}
+        <button onClick={ handleClick } type="button">
           <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
+            data-testid="profile-top-btn"
+            src={ profileIcon }
             alt="SVG"
           />
         </button>
-      )}
+      </div>
+      <div className="title-search">
+        <h1 className="page-title" data-testid="page-title">{title}</h1>
+        {!searching ? '' : (
+          <SearchBar />
+        )}
+      </div>
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { saveUser } from '../redux/actions';
 import { saveEmailLocalStorage } from '../services/LocalStorage';
+import '../style/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -35,25 +36,29 @@ function Login() {
   }, [email, password]);
 
   return (
-    <div>
-      <form action="">
-        <label htmlFor="input__email">
+    <form action="">
+      <div className="login-inputs">
+        <label className="login-label" htmlFor="input__email">
+          Email
           <input
             data-testid="email-input"
             type="text"
             name="email"
             id="input__email"
             placeholder="Email"
+            className="login-input"
             onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
-        <label htmlFor="input__password">
+        <label className="login-label" htmlFor="input__password">
+          Password
           <input
             data-testid="password-input"
             type="password"
             name="password"
             id="input__password"
-            placeholder="password"
+            placeholder="Password"
+            className="login-input"
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
@@ -62,11 +67,12 @@ function Login() {
           type="button"
           onClick={ handleClick }
           disabled={ isDisabled }
+          className="login-button"
         >
           Enter
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 

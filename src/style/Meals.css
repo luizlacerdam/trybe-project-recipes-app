@@ -1,0 +1,37 @@
+.recipe-image {
+  width: 100px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.up-header {
+  margin: auto;
+}
+
+.title-search {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 360px;
+}
+
+.page-title {
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.search-input {
+  margin: 0;
+  margin-bottom: 10px;
+  width: 265px;
+}

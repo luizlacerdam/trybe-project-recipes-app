@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import style from '../styles/CarouselRecommendations.module.css';
+import style from '../style/CarouselRecommendations.module.css';
 
 function CarouselRecommendations() {
   const [isMeal, setIsMeal] = useState(false);

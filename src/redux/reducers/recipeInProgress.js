@@ -4,7 +4,7 @@ const INIT_STATE = {
   currentRecipe: [],
 };
 
-const drinks = (state = INIT_STATE, action) => {
+const recipeInProgress = (state = INIT_STATE, action) => {
   switch (action.type) {
   case SAVE_CURRENT_RECIPE:
     return {
@@ -16,4 +16,4 @@ const drinks = (state = INIT_STATE, action) => {
   }
 };
 
-export default drinks;
+export default recipeInProgress;
