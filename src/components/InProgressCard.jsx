@@ -27,6 +27,7 @@ function InProgressCard() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
   const recipeDetailDrink = useSelector((globalState) => globalState.drinks.recipeDrinks);
   const [disabled, setDisabled] = useState(true);
+  const date = new Date();
 
   useEffect(() => {
     const getPage = () => {
@@ -69,6 +70,31 @@ function InProgressCard() {
     if (checkList.length !== ingredientList.length) setDisabled(true);
   }, [checkList]);
 
+  const test = currentRecipe[0];
+  console.log(test);
+
+  const saveObject = currentRecipe.map((recipe) => (
+    {
+      id,
+      type: page.toLowerCase(),
+      nationality: recipe.strArea === undefined ? '' : recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: page === 'Meal' ? '' : recipe.strAlcoholic,
+      name: recipe[`str${page}`],
+      image: recipe[`str${page}Thumb`],
+      doneDate: date.toISOString(),
+      tags: ((recipe.strTags !== null && recipe.strTags)
+        ? recipe.strTags.split(',') : []),
+    }
+  ));
+
+  const handleClick = () => {
+    localStorage.setItem('doneRecipes', JSON.stringify(saveObject));
+    history.push('/done-recipes');
+  };
+
+  console.log(currentRecipe);
+
   return (
     <div>
       {currentRecipe.map((recipe) => (
@@ -93,6 +119,7 @@ function InProgressCard() {
             disabled={ disabled }
             data-testid="finish-recipe-btn"
             type="button"
+            onClick={ handleClick }
           >
             Done
           </button>
