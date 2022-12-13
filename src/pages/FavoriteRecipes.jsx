@@ -27,7 +27,7 @@ function FavoriteRecipes() {
     setLinkMsg('Link copied!');
     if (name.includes('meal')) {
       copy(`http://localhost:3000/meals/${id}`);
-    } else if (name.includes('drink')) {
+    } else {
       copy(`http://localhost:3000/drinks/${id}`);
     }
   };

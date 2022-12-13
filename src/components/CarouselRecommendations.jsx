@@ -18,14 +18,14 @@ function CarouselRecommendations() {
   useEffect(() => {
     if (pathname.includes('meals')) {
       setIsMeal(true);
-    } else if (pathname.includes('drinks')) {
+    } else {
       setIsMeal(false);
     }
   }, []);
 
   if (pathname.includes('meals')) {
     recommendations = listRecommendationsDrinks;
-  } else if (pathname.includes('drinks')) {
+  } else {
     recommendations = listRecommendationsMeals;
   }
 
