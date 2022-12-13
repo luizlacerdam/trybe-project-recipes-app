@@ -69,39 +69,42 @@ function Recipes() {
   };
 
   return (
-    <main>
-      {verifyPageCategories().map((category, index) => {
-        if (index < FIVE) {
-          return (
-            <button
-              key={ category.strCategory }
-              data-testid={ `${category.strCategory}-category-filter` }
-              type="button"
-              name={ category.strCategory }
-              onClick={ (event) => {
-                handleCategoryFilter(event, category.strCategory);
-              } }
-            >
-              {category.strCategory}
+    <main className="recipes">
+      <div className="recipe-categories">
+        {verifyPageCategories().map((category, index) => {
+          if (index < FIVE) {
+            return (
+              <button
+                key={ category.strCategory }
+                data-testid={ `${category.strCategory}-category-filter` }
+                type="button"
+                name={ category.strCategory }
+                onClick={ (event) => {
+                  handleCategoryFilter(event, category.strCategory);
+                } }
+                className="categorie-button"
+              >
+                {category.strCategory}
 
-            </button>
-          );
-        }
-        return true;
-      })}
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ () => {
-          if (pathname === '/meals') {
-            return (dispatch(fetchRecipeMainMeals()));
+              </button>
+            );
           }
-          return (dispatch(fetchRecipeMainDrinks()));
-        } }
-      >
-        All
+          return true;
+        })}
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ () => {
+            if (pathname === '/meals') {
+              return (dispatch(fetchRecipeMainMeals()));
+            }
+            return (dispatch(fetchRecipeMainDrinks()));
+          } }
+        >
+          All
 
-      </button>
+        </button>
+      </div>
       {verifyPageRecipes().map((recipe, index) => {
         if (index < TWELVE) {
           return (<RecipesCard

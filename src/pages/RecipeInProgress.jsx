@@ -1,7 +1,7 @@
 import React from 'react';
 import InProgressCard from '../components/InProgressCard';
 
-function InProgressRecipe() {
+function RecipeInProgress() {
   return (
     <div>
       <InProgressCard />
@@ -9,4 +9,4 @@ function InProgressRecipe() {
   );
 }
 
-export default InProgressRecipe;
+export default RecipeInProgress;

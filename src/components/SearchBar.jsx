@@ -123,6 +123,7 @@ function SearchBar() {
         onClick={ doSearch }
         data-testid="exec-search-btn"
         type="button"
+        className="search-button"
       >
         Search
       </button>
