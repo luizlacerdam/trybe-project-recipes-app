@@ -9,6 +9,12 @@ const AllButton = 'All-category-filter';
 const goatCategory = 'Goat-category-filter';
 const cocoaCategory = 'Cocoa-category-filter';
 const recipeTitle = 'recipe-title';
+const favoriteBtn = 'favorite-btn';
+const arrabiataUrl = '/meals/52977';
+const ggUrl = '/drinks/15997';
+const whiteHeartUrl = 'whiteHeartIcon.svg';
+const blackHeartUrl = 'blackHeartIcon.svg';
+const arrabiata = 'Spicy Arrabiata Penne';
 
 describe('Testa a o componente Recipes.', () => {
   describe('1. Testa o componente Recipes em "/meals".', () => {
@@ -51,13 +57,39 @@ describe('Testa a o componente Recipes.', () => {
     });
     test('1.5. Testa se ao clicar em um card de "/meals" é direcionado para a página do mesmo.', async () => {
       const { history } = renderWithRouterAndRedux(<App />);
-      act(() => history.push('/meals/52977'));
+      act(() => history.push(arrabiataUrl));
       // expect(await screen.findByText('Corba')).toBeInTheDocument();
       // userEvent.click(await screen.findByTestId('0-card-img'));
       const { location: { pathname } } = history;
-      expect(pathname).toBe('/meals/52977');
+      expect(pathname).toBe(arrabiataUrl);
       expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
-      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('Spicy Arrabiata Penne');
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent(arrabiata);
+    });
+    test('1.6. Testa componente de favoritar na página de detalhes de uma receita.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push(arrabiataUrl));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe(arrabiataUrl);
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent(arrabiata);
+      expect(screen.getByTestId(favoriteBtn)).toBeInTheDocument();
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', whiteHeartUrl);
+      userEvent.click(screen.getByTestId(favoriteBtn));
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', blackHeartUrl);
+      userEvent.click(screen.getByTestId(favoriteBtn));
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', whiteHeartUrl);
+    });
+    test('1.7. Testa componente de compartilhar na página de detalhes de uma receita.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push(arrabiataUrl));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe(arrabiataUrl);
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent(arrabiata);
+      expect(screen.getByTestId('share-btn')).toBeInTheDocument();
+      window.document.execCommand = jest.fn(() => true);
+      userEvent.click(screen.getByTestId('share-btn'));
+      expect(await screen.findByText('Link copied!')).toBeInTheDocument();
     });
   });
   describe('2. Testa o componente Recipes em "/drinks".', () => {
@@ -107,6 +139,32 @@ describe('Testa a o componente Recipes.', () => {
       expect(pathname).toBe('/drinks/15997');
       expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
       expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('GG');
+    });
+    test('2.6. Testa componente de favoritar na página de detalhes de uma receita.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push(ggUrl));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe(ggUrl);
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('GG');
+      expect(screen.getByTestId(favoriteBtn)).toBeInTheDocument();
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', whiteHeartUrl);
+      userEvent.click(screen.getByTestId(favoriteBtn));
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', blackHeartUrl);
+      userEvent.click(screen.getByTestId(favoriteBtn));
+      expect(screen.getByTestId(favoriteBtn)).toHaveAttribute('src', whiteHeartUrl);
+    });
+    test('2.7. Testa componente de compartilhar na página de detalhes de uma receita.', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => history.push(ggUrl));
+      const { location: { pathname } } = history;
+      expect(pathname).toBe(ggUrl);
+      expect(await screen.findByTestId(recipeTitle)).toBeInTheDocument();
+      expect(await screen.findByTestId(recipeTitle)).toHaveTextContent('GG');
+      expect(screen.getByTestId('share-btn')).toBeInTheDocument();
+      window.document.execCommand = jest.fn(() => true);
+      userEvent.click(screen.getByTestId('share-btn'));
+      expect(await screen.findByText('Link copied!')).toBeInTheDocument();
     });
   });
 });
