@@ -28,7 +28,7 @@ function RecipeDetails() {
       dispatch(fetchRecipeDetailsMeals(id));
       dispatch(fetchRecommendationDrinks());
       setIsMeal(true);
-    } else if (pathname === `/drinks/${id}`) {
+    } else {
       dispatch(fetchRecipeDetailsDrinks(id));
       dispatch(fetchRecommendationMeals());
       setIsMeal(false);
@@ -38,14 +38,14 @@ function RecipeDetails() {
   useEffect(() => {
     if (pathname === `/meals/${id}`) {
       dispatch(saveCurrentRecipe(recipeDetailMeal));
-    } else if (pathname === `/drinks/${id}`) {
+    } else {
       dispatch(saveCurrentRecipe(recipeDetailDrink));
     }
   }, [recipeDetailDrink, recipeDetailMeal]);
 
   if (pathname === `/meals/${id}`) {
     recipeDetail = recipeDetailMeal;
-  } else if (pathname === `/drinks/${id}`) {
+  } else {
     recipeDetail = recipeDetailDrink;
   }
 
