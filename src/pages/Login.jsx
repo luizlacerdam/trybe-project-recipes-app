@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <div className={ style.container_login }>
-      <img src={ logo } alt="logo recipes app" />
+      <img className={ style.login_logo } src={ logo } alt="logo recipes app" />
       <form className={ style.box_login }>
         <label htmlFor="input__email">
           <input

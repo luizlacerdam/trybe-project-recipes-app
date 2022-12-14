@@ -9,8 +9,8 @@ import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/acti
 import {
   fetchRecommendationDrinks,
   fetchRecommendationMeals,
-  saveCurrentRecipe,
-} from '../redux/actions/actionsRecommendations';
+  saveCurrentRecipe } from '../redux/actions/actionsRecommendations';
+import style from '../style/RecipeDetails.module.css';
 
 function RecipeDetails() {
   const recipeDetailMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -73,22 +73,26 @@ function RecipeDetails() {
     .map((ingredients) => ingredients[1])).flat();
 
   return (
-    <div>
-      <h1>Recipes Details</h1>
-      <h3>Card Recipes Details</h3>
-      <ShareButton />
-      <FavoriteButton recipeProp={ handleRecipeProp() } />
+    <div className={ style.recipe_details }>
       { recipeDetail.map((recipe, index) => (
         <div key={ index }>
-          <img
-            data-testid="recipe-photo"
-            src={ isMeal ? recipe.strMealThumb : recipe.strDrinkThumb }
-            alt={ isMeal ? recipe.strMeal : recipe.strDrink }
-            className="recipe-image"
-          />
-          <h3 data-testid="recipe-title">
-            { isMeal ? recipe.strMeal : recipe.strDrink }
-          </h3>
+          <div>
+            <img
+              data-testid="recipe-photo"
+              src={ isMeal ? recipe.strMealThumb : recipe.strDrinkThumb }
+              alt={ isMeal ? recipe.strMeal : recipe.strDrink }
+              className={ style.details_image }
+            />
+          </div>
+          <div className={ style.header_buttons }>
+            <div className={ style.share_favorite }>
+              <ShareButton />
+              <FavoriteButton recipeProp={ handleRecipeProp() } />
+            </div>
+            <h3 className={ style.details_title } data-testid="recipe-title">
+              { isMeal ? recipe.strMeal : recipe.strDrink }
+            </h3>
+          </div>
           { isMeal && <p data-testid="recipe-category">{recipe.strCategory}</p> }
           { !isMeal && <p data-testid="recipe-category">{recipe.strAlcoholic}</p> }
           { ingredientsList.map((ingredient, idx) => (

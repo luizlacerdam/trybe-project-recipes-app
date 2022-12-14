@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import style from '../style/RecipeDetails.module.css';
 
 const copy = require('clipboard-copy');
 
@@ -26,9 +28,13 @@ function ShareButton() {
         data-testid="share-btn"
         type="button"
         onClick={ handleButton }
+        className={ style.header_button }
       >
-        <img src={ shareIcon } alt="share-icon" />
-
+        <FontAwesomeIcon
+          className={ style.header_button_image }
+          icon={ solid('share-nodes') }
+          size="3x"
+        />
       </button>
       <div>{linkMsg}</div>
     </div>

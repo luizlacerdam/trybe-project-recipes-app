@@ -1,0 +1,40 @@
+.details_image {
+  filter: saturate(60%);
+  position: relative;
+  width: 360px;
+}
+
+.header_buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: -360px;
+  position: relative;
+}
+
+
+.header_button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  margin: 0;
+  max-width: 50px;
+}
+
+.header_button_image {
+
+  /* color: #fcc436; */
+  color: #2e0e5f;
+}
+
+.details_title {
+  color: white;
+  display: flex;
+  font-size: 50px;
+  justify-content: center;
+  margin: 80px;
+}
+
+.share_favorite {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

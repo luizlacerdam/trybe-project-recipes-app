@@ -1,8 +1,11 @@
+import { regular, solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import style from '../style/RecipeDetails.module.css';
 
 function FavoriteButton({ recipeProp }) {
   const history = useHistory();
@@ -67,8 +70,20 @@ function FavoriteButton({ recipeProp }) {
       data-testid="favorite-btn"
       onClick={ handleButton }
       src={ favorites ? blackHeartIcon : whiteHeartIcon }
+      className={ style.header_button }
     >
-      <img src={ favorites ? blackHeartIcon : whiteHeartIcon } alt="favorite-icon" />
+      { favorites ? (
+        <FontAwesomeIcon
+          className={ style.header_button_image }
+          icon={ solid('heart') }
+          size="3x"
+        />)
+        : (
+          <FontAwesomeIcon
+            className={ style.header_button_image }
+            icon={ regular('heart') }
+            size="3x"
+          />)}
     </button>
   );
 }
