@@ -84,6 +84,7 @@ function RecipeDetails() {
             data-testid="recipe-photo"
             src={ isMeal ? recipe.strMealThumb : recipe.strDrinkThumb }
             alt={ isMeal ? recipe.strMeal : recipe.strDrink }
+            className="recipe-image"
           />
           <h3 data-testid="recipe-title">
             { isMeal ? recipe.strMeal : recipe.strDrink }
