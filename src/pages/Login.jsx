@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { saveUser } from '../redux/actions';
 import { saveEmailLocalStorage } from '../services/LocalStorage';
 import logo from '../images/logoRecipesApp.png';
@@ -10,6 +11,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -36,6 +38,14 @@ function Login() {
     }
   }, [email, password]);
 
+  const handleShowHidePassword = () => {
+    if (showPassword) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
+  };
+
   return (
     <div className={ style.container_login }>
       <img src={ logo } alt="logo recipes app" />
@@ -51,16 +61,27 @@ function Login() {
             onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
-        <label htmlFor="input__password">
+        <label htmlFor="input__password" className={ style.label_password }>
           <input
             className={ style.input_login }
             data-testid="password-input"
-            type="password"
+            type={ showPassword ? 'text' : 'password' }
             name="password"
             id="input__password"
             placeholder="password"
             onChange={ ({ target }) => setPassword(target.value) }
           />
+          { showPassword ? (
+            <AiOutlineEyeInvisible
+              className={ style.icon_password }
+              onClick={ handleShowHidePassword }
+            />
+          ) : (
+            <AiOutlineEye
+              className={ style.icon_password }
+              onClick={ handleShowHidePassword }
+            />
+          )}
         </label>
         <button
           className={ style.button_login }
