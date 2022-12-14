@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function ShareButton() {
   const history = useHistory();
+  const mealsOrDrinkId = useParams('/meals/:id');
+  const { id } = mealsOrDrinkId;
   const [linkMsg, setLinkMsg] = useState('');
   const { location: { pathname } } = history;
 
   const handleButton = () => {
-    setLinkMsg('Link copied!');
-    copy(`http://localhost:3000${pathname}`);
+    if (pathname.includes('meal')) {
+      setLinkMsg('Link copied!');
+      copy(`http://localhost:3000/meals/${id}`);
+    } else {
+      setLinkMsg('Link copied!');
+      copy(`http://localhost:3000/drinks/${id}`);
+    }
   };
   return (
     <div>
