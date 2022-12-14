@@ -4,6 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/actions';
 import { saveCurrentRecipe } from '../redux/actions/actionsRecommendations';
 import '../styles/RecipeInProgress.css';
+import FavoriteButton from './FavoriteButton';
+import ShareButton from './ShareButton';
 
 function InProgressCard() {
   const currentRecipe = useSelector((state) => state.recipeInProgress.currentRecipe);
@@ -106,8 +108,8 @@ function InProgressCard() {
             { page === 'Meal' ? recipe.strMeal
               : recipe.strDrink }
           </h1>
-          <button data-testid="share-btn" type="button">Share</button>
-          <button data-testid="favorite-btn" type="button">Favorite</button>
+          <ShareButton />
+          <FavoriteButton recipeProp={ recipe } />
           <h2 data-testid="recipe-category">{recipe.strCategory}</h2>
           <p data-testid="instructions">{recipe.strInstructions}</p>
           <button
