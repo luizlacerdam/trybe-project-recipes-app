@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { saveUser } from '../redux/actions';
 import { saveEmailLocalStorage } from '../services/LocalStorage';
+import style from '../styles/login.module.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -35,10 +36,11 @@ function Login() {
   }, [email, password]);
 
   return (
-    <div>
-      <form action="">
+    <div className={ style.container_login }>
+      <form className={ style.box_login }>
         <label htmlFor="input__email">
           <input
+            className={ style.input_login }
             data-testid="email-input"
             type="text"
             name="email"
@@ -49,6 +51,7 @@ function Login() {
         </label>
         <label htmlFor="input__password">
           <input
+            className={ style.input_login }
             data-testid="password-input"
             type="password"
             name="password"
@@ -58,12 +61,13 @@ function Login() {
           />
         </label>
         <button
+          className={ style.button_login }
           data-testid="login-submit-btn"
           type="button"
           onClick={ handleClick }
           disabled={ isDisabled }
         >
-          Enter
+          Sign In
         </button>
       </form>
     </div>
