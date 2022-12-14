@@ -9,11 +9,10 @@
 
 .box_login {
   align-items: center;
-  border: 1px solid white;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 700px;
+  height: 500px;
   justify-content: end;
   width: 80%;
 }

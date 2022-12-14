@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { saveUser } from '../redux/actions';
 import { saveEmailLocalStorage } from '../services/LocalStorage';
+import logo from '../images/logoRecipesApp.png';
 import style from '../styles/login.module.css';
 
 function Login() {
@@ -37,6 +38,7 @@ function Login() {
 
   return (
     <div className={ style.container_login }>
+      <img src={ logo } alt="logo recipes app" />
       <form className={ style.box_login }>
         <label htmlFor="input__email">
           <input
