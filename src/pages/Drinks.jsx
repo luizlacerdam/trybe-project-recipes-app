@@ -7,7 +7,6 @@ function Drinks() {
   return (
     <div>
       <Header title="Drinks" searchButton />
-      <p>Drinks</p>
       <Recipes />
       <Footer />
     </div>

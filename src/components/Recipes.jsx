@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
+import {
+  fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
   fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
   fetchRecipeMainDrinks,
-  fetchRecipeMainMeals } from '../redux/actions';
+  fetchRecipeMainMeals,
+} from '../redux/actions';
 import RecipesCard from './RecipesCard';
 
 function Recipes() {
@@ -84,7 +86,9 @@ function Recipes() {
                 } }
                 className="categorie-button"
               >
-                {category.strCategory}
+                <p className="categorie-button-text">
+                  {category.strCategory}
+                </p>
 
               </button>
             );
@@ -92,6 +96,7 @@ function Recipes() {
           return true;
         })}
         <button
+          className="categorie-button"
           type="button"
           data-testid="All-category-filter"
           onClick={ () => {
@@ -101,7 +106,9 @@ function Recipes() {
             return (dispatch(fetchRecipeMainDrinks()));
           } }
         >
-          All
+          <p className="categorie-button-text">
+            All
+          </p>
 
         </button>
       </div>
