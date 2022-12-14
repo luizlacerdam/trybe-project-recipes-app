@@ -15,7 +15,7 @@ function StartRecipeButton() {
 
   if (pathname === `/meals/${id}`) {
     recipeDetail = recipeMeal;
-  } else if (pathname === `/drinks/${id}`) {
+  } else {
     recipeDetail = recipeDrink;
   }
 
@@ -29,7 +29,7 @@ function StartRecipeButton() {
   const handleClick = () => {
     if (pathname.includes('meals')) {
       saveInProgressRecipeLocalStorage('meal', recipeMeal[0].idMeal, ingredientsList);
-    } else if (pathname.includes('drinks')) {
+    } else {
       saveInProgressRecipeLocalStorage('drink', recipeDrink[0].idDrink, ingredientsList);
     }
     setRecipeInProgress(true);

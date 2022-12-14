@@ -4,11 +4,11 @@ import './App.css';
 import DoneRecipes from './pages/DoneRecipes';
 import Drinks from './pages/Drinks';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import RecipeInProgress from './pages/RecipeInProgress';
 import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
   return (
