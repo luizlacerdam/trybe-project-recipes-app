@@ -1,5 +1,5 @@
 .recipe-image {
-  width: 100px;
+  width: 120px;
 }
 
 .header {
@@ -66,4 +66,14 @@
 
 .categorie-button {
   margin: auto;
+}
+
+.meal-cads {
+  display: grid;
+  grid-template-columns: 180px 180px;
+}
+
+.recipe-card {
+  margin-left: 30px;
+  margin-right: 30px;
 }

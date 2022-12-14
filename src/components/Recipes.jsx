@@ -105,17 +105,19 @@ function Recipes() {
 
         </button>
       </div>
-      {verifyPageRecipes().map((recipe, index) => {
-        if (index < TWELVE) {
-          return (<RecipesCard
-            key={ index }
-            recipe={ recipe }
-            index={ index }
-            page={ pathname }
-          />);
-        }
-        return true;
-      })}
+      <div className="meal-cads">
+        {verifyPageRecipes().map((recipe, index) => {
+          if (index < TWELVE) {
+            return (<RecipesCard
+              key={ index }
+              recipe={ recipe }
+              index={ index }
+              page={ pathname }
+            />);
+          }
+          return true;
+        })}
+      </div>
     </main>
   );
 }

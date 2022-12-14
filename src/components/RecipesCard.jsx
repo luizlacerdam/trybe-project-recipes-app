@@ -38,6 +38,7 @@ function RecipesCard({ recipe, index, page }) {
     >
       <div
         data-testid={ `${index}-recipe-card` }
+        className="recipe-card"
       >
         <img
           data-testid={ `${index}-card-img` }
