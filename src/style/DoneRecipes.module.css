@@ -1,0 +1,73 @@
+.done_recipe_card {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.container_buttons_filter {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container_recipe_done {
+  border: 1px solid #ff5733;
+  border-radius: 6px;
+  display: flex;
+  width: 90%;
+}
+
+.link_thumb {
+  height: 11rem;
+  width: 10rem;
+}
+
+.image_card {
+  border-radius: 6px 0 0 6px;
+  height: 11rem;
+  width: 10rem;
+}
+
+.box_info_recipe_done {
+  background-color: #f1f1f1;
+  border-radius: 0 6px 6px 0;
+  height: 11rem;
+  padding-left: 8px;
+  width: 100%;
+}
+
+.title {
+  color: #ff5733;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.type_nationality {
+  font-size: 0.8rem;
+  margin-top: -1px;
+}
+
+.date_done {
+  font-size: 0.8rem;
+  margin: 20px 0;
+}
+
+.box_tag {
+  display: flex;
+  gap: 10px;
+  margin-top: -10px;
+}
+
+.tag {
+  background-color: #ff5733;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.8rem;
+  padding: 3px;
+}
