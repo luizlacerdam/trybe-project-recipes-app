@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchRecipeDetailsDrinks, fetchRecipeDetailsMeals } from '../redux/actions';
@@ -101,43 +102,65 @@ function InProgressCard() {
             src={ page === 'Meal' ? recipe.strMealThumb
               : recipe.strDrinkThumb }
             alt="Thumb"
+            className="thumb_recipe_inProgress"
           />
-          <h1
-            data-testid="recipe-title"
-          >
-            { page === 'Meal' ? recipe.strMeal
-              : recipe.strDrink }
-          </h1>
-          <ShareButton />
-          <FavoriteButton recipeProp={ recipe } />
-          <h2 data-testid="recipe-category">{recipe.strCategory}</h2>
-          <p data-testid="instructions">{recipe.strInstructions}</p>
-          <button
-            disabled={ disabled }
-            data-testid="finish-recipe-btn"
-            type="button"
-            onClick={ handleClick }
-          >
-            Done
-          </button>
-          <div>
+          <div className="box_info_recipe">
+            <h1
+              data-testid="recipe-title"
+              className="title_recipe_inProgress"
+            >
+              { page === 'Meal' ? recipe.strMeal
+                : recipe.strDrink }
+            </h1>
+            <p data-testid="recipe-category">{recipe.strCategory}</p>
+            <div className="box_butons_recipe_inProgress">
+              <ShareButton />
+              <FavoriteButton recipeProp={ recipe } />
+            </div>
+          </div>
+          <div className="list_ingredient_recipe_inProgress">
+            <h2 className="title_default_inProgress">Ingredients</h2>
             {ingredientList.map((ingredient, index) => (
-              <label
-                data-testid={ `${index}-ingredient-step` }
-                key={ `ingredient-${index}` }
-                htmlFor={ `ingredient-${index}` }
-                className={ checkList.includes(ingredient) ? 'checked' : '' }
-              >
-                <input
-                  type="checkbox"
-                  name={ ingredient }
-                  id={ `ingredient-${index}` }
-                  onChange={ handleChange }
-                  checked={ checkList.includes(ingredient) }
-                />
-                { ingredient }
-              </label>
+              <ul key={ `ingredient-${index}` } className="list_ingredients_inProgress">
+                <li>
+                  <label
+                    data-testid={ `${index}-ingredient-step` }
+                    htmlFor={ `ingredient-${index}` }
+                    className={ checkList.includes(ingredient) ? 'checked' : '' }
+                  >
+                    <input
+                      type="checkbox"
+                      name={ ingredient }
+                      id={ `ingredient-${index}` }
+                      onChange={ handleChange }
+                      checked={ checkList.includes(ingredient) }
+                      className="input_check_inProgress"
+                    />
+                    { ingredient }
+                  </label>
+                </li>
+              </ul>
+
             ))}
+          </div>
+          <div>
+            <h2 className="title_default_inProgress">Instructions</h2>
+            <p data-testid="instructions" className="instructions_inProgress">
+              {recipe.strInstructions}
+            </p>
+            <div className="container_btn_done_recipe">
+              <button
+                disabled={ disabled }
+                data-testid="finish-recipe-btn"
+                type="button"
+                onClick={ handleClick }
+                className="btn_done_recipe"
+
+              >
+                <AiOutlineCheckCircle className="icon_done_recipe" />
+                Done
+              </button>
+            </div>
           </div>
         </div>
       ))}
