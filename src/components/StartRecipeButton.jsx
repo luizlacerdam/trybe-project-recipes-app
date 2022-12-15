@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { BsPencil } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { saveInProgressRecipeLocalStorage } from '../services/LocalStorage';
+import style from '../style/StartRecipeButton.module.css';
 
 function StartRecipeButton() {
   const recipeMeal = useSelector((globalState) => globalState.meals.recipeMeals);
@@ -44,18 +46,21 @@ function StartRecipeButton() {
   }, []);
 
   return (
-    <button
-      style={ {
-        position: 'fixed',
-        bottom: '0px',
-      } }
-      data-testid="start-recipe-btn"
-      type="button"
-      onClick={ handleClick }
-    >
-      { !recipeInProgress ? 'Start Recipe' : 'Continue Recipe' }
-
-    </button>
+    <div className={ style.container_button_start }>
+      <button
+        style={ {
+          position: 'fixed',
+          bottom: '0px',
+        } }
+        data-testid="start-recipe-btn"
+        type="button"
+        onClick={ handleClick }
+        className={ style.button_start_recipe }
+      >
+        <BsPencil className={ style.icon_btn_start } />
+        { !recipeInProgress ? 'Start Recipe' : 'Continue Recipe' }
+      </button>
+    </div>
   );
 }
 
