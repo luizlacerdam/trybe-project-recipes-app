@@ -55,6 +55,17 @@
 .box_buttons {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.box_btn_shared {
+  align-items: center;
+  display: flex;
+}
+
+.msg_shared {
+  color: #ff5733;
 }
 
 .container_list_ingredients {
