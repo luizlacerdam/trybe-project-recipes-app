@@ -51,6 +51,10 @@
   list-style: none;
 }
 
+.input_check_inProgress:checked {
+  background: #ff5733;
+}
+
 .title_default_inProgress {
   color: #ff5733;
   margin-left: 1.5rem;
