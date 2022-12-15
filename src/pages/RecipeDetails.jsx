@@ -106,6 +106,7 @@ function RecipeDetails() {
             </div>
           </div>
           <div className={ style.container_list_ingredients }>
+            <h2 className={ style.title_default }>Ingredients</h2>
             { ingredientsList.map((ingredient, idx) => (
               <ul key={ idx }>
                 <li
@@ -117,6 +118,7 @@ function RecipeDetails() {
               </ul>
             ))}
           </div>
+          <h2 className={ style.title_default }>Instructions</h2>
           <p data-testid="instructions" className={ style.instructions }>
             {recipe.strInstructions}
           </p>
@@ -130,6 +132,7 @@ function RecipeDetails() {
           /> }
         </div>
       )) }
+      <h2 className={ style.title_default }>Recommended</h2>
       <CarouselRecommendations />
       <StartRecipeButton />
     </div>

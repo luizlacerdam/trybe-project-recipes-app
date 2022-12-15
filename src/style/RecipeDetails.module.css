@@ -68,6 +68,11 @@
   color: #ff5733;
 }
 
+.title_default {
+  color: #ff5733;
+  margin-left: 1.5rem;
+}
+
 .container_list_ingredients {
   margin-top: 75px;
 }
