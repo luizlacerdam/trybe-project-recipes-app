@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
-  cleanDrinksError, cleanMealsError, fetchDrinks, fetchMeals } from '../redux/actions';
+  cleanDrinksError, cleanMealsError, fetchDrinks, fetchMeals,
+} from '../redux/actions';
+import style from '../style/Meals.module.css';
 
 function SearchBar() {
   const meals = useSelector((state) => state.meals.meals);
@@ -74,7 +76,7 @@ function SearchBar() {
   };
 
   return (
-    <div className="search-bar">
+    <div className={ style.search_bar }>
       <input
         data-testid="search-input"
         onChange={
@@ -82,9 +84,9 @@ function SearchBar() {
         }
         value={ apiRequest.search }
         type="text"
-        className="search-input"
+        className={ style.search_input }
       />
-      <div className="search-type">
+      <div className={ style.search_type }>
         <label htmlFor="ingredient">
           <input
             value="i"
@@ -123,7 +125,7 @@ function SearchBar() {
         onClick={ doSearch }
         data-testid="exec-search-btn"
         type="button"
-        className="search-button"
+        className={ style.search_button }
       >
         Search
       </button>

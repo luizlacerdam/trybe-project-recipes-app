@@ -32,6 +32,7 @@
 .header_button {
   border: none;
   font-size: 0.7rem;
+  margin-bottom: 5px;
   width: 50px;
 }
 

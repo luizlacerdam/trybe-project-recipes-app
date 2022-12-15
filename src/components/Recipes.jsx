@@ -5,8 +5,9 @@ import {
   fetchCategoryDrinksFilter, fetchCategoryMealsFilter,
   fetchRecipeCategoriesDrinks, fetchRecipeCategoriesMeals,
   fetchRecipeMainDrinks,
-  fetchRecipeMainMeals,
-} from '../redux/actions';
+  fetchRecipeMainMeals } from '../redux/actions';
+import style from '../style/Meals.module.css';
+import Icon from './Icon';
 import RecipesCard from './RecipesCard';
 
 function Recipes() {
@@ -14,6 +15,7 @@ function Recipes() {
   const history = useHistory();
   const [categoryToggle, setCategoryToggle] = useState('');
   const { location: { pathname } } = history;
+  const [page, setPage] = useState('');
   const FIVE = 5;
   const TWELVE = 12;
 
@@ -27,9 +29,11 @@ function Recipes() {
     if (pathname === '/meals') {
       dispatch(fetchRecipeMainMeals());
       dispatch(fetchRecipeCategoriesMeals());
+      setPage('Meals');
     } else {
       dispatch(fetchRecipeMainDrinks());
       dispatch(fetchRecipeCategoriesDrinks());
+      setPage('Drinks');
     }
   }, []);
 
@@ -65,15 +69,17 @@ function Recipes() {
     setCategoryToggle(category);
     // ends toggle
     if (pathname === '/meals') {
-      return (dispatch(fetchCategoryMealsFilter(category)));
+      dispatch(fetchCategoryMealsFilter(category));
+    } else {
+      dispatch(fetchCategoryDrinksFilter(category));
     }
-    return (dispatch(fetchCategoryDrinksFilter(category)));
   };
 
   return (
-    <main className="recipes">
-      <div className="recipe-categories">
+    <main className={ style.recipes }>
+      <div className={ style.recipe_categories }>
         {verifyPageCategories().map((category, index) => {
+          console.log(category.strCategory);
           if (index < FIVE) {
             return (
               <button
@@ -84,19 +90,19 @@ function Recipes() {
                 onClick={ (event) => {
                   handleCategoryFilter(event, category.strCategory);
                 } }
-                className="categorie-button"
+                className={ style.categorie_button }
               >
-                <p className="categorie-button-text">
+                <Icon shape={ category.strCategory } />
+                <p className={ style.categorie_button_text }>
                   {category.strCategory}
                 </p>
-
               </button>
             );
           }
           return true;
         })}
         <button
-          className="categorie-button"
+          className={ style.categorie_button }
           type="button"
           data-testid="All-category-filter"
           onClick={ () => {
@@ -106,13 +112,13 @@ function Recipes() {
             return (dispatch(fetchRecipeMainDrinks()));
           } }
         >
-          <p className="categorie-button-text">
+          <Icon shape={ `All${page}` } />
+          <p className={ style.categorie_button_text }>
             All
           </p>
-
         </button>
       </div>
-      <div className="meal-cads">
+      <div className={ style.meal_cads }>
         {verifyPageRecipes().map((recipe, index) => {
           if (index < TWELVE) {
             return (<RecipesCard

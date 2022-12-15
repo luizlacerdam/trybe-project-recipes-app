@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import style from '../style/Meals.module.css';
 
 function RecipesCard({ recipe, index, page }) {
   const imgThumbVerify = () => {
@@ -38,19 +39,18 @@ function RecipesCard({ recipe, index, page }) {
     >
       <div
         data-testid={ `${index}-recipe-card` }
-        className="recipe-card"
+        className={ style.recipe_card }
       >
         <img
           data-testid={ `${index}-card-img` }
           src={ recipe[imgThumbVerify()] }
           alt={ recipe[nameStrVerify()] }
-          className="recipe-image"
+          className={ style.recipe_image }
         />
         <div
           data-testid={ `${index}-card-name` }
         >
           {recipe[nameStrVerify()]}
-
         </div>
       </div>
     </Link>

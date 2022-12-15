@@ -1,8 +1,10 @@
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import logo from '../images/headerLogo.png';
+import style from '../style/Meals.module.css';
 import SearchBar from './SearchBar';
 
 function Header(props) {
@@ -19,27 +21,41 @@ function Header(props) {
   };
 
   return (
-    <div className="header">
-      <div className="up-header">
-        {!searchButton ? '' : (
-          <button onClick={ isSeaching } type="button">
-            <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="SVG"
+    <div className={ style.header }>
+      <div className={ style.up_header }>
+        <div className={ style.header_button }>
+          <img
+            className={ style.header_icon }
+            src={ logo }
+            alt="header-logo"
+          />
+          <h1 className={ style.app_name }>Recipes app</h1>
+        </div>
+        <div className={ style.header_buttons }>
+          {!searchButton ? '' : (
+            <button
+              className={ style.header_button }
+              onClick={ isSeaching }
+              type="button"
+            >
+              <FontAwesomeIcon
+                className={ style.header_button_icon }
+                icon={ solid('magnifying-glass') }
+                size="3x"
+              />
+            </button>
+          )}
+          <button className={ style.header_button } onClick={ handleClick } type="button">
+            <FontAwesomeIcon
+              className={ style.header_button_icon }
+              icon={ solid('user') }
+              size="3x"
             />
           </button>
-        )}
-        <button onClick={ handleClick } type="button">
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="SVG"
-          />
-        </button>
+        </div>
       </div>
-      <div className="title-search">
-        <h1 className="page-title" data-testid="page-title">{title}</h1>
+      <div className={ style.title_search }>
+        <h1 className={ style.page_title } data-testid="page-title">{title}</h1>
         {!searching ? '' : (
           <SearchBar />
         )}

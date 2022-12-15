@@ -1,0 +1,144 @@
+.recipe_image {
+  width: 120px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.up_header {
+  background-color: #21106a;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 10px;
+  width: 360px;
+}
+
+.header_buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 80px;
+}
+
+.header_button {
+  background-color: #21106a;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  width: 200px;
+}
+
+.header_button_icon {
+  color: #ff5733;
+  margin: auto;
+  width: 30px;
+}
+
+.header_icon {
+  margin: auto;
+  width: 50px;
+}
+
+.app_name {
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.title_search {
+  display: flex;
+  flex-direction: column;
+}
+
+.page_title {
+  background-color: #ff5733;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 110px;
+}
+
+.search_bar {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.search_input {
+  margin: auto;
+  margin-bottom: 10px;
+  width: 265px;
+}
+
+.search_type {
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.search_button {
+  background: #2fc18c;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: large;
+  font-weight: 900;
+  height: 37px;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe_categories {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.categorie_button {
+  background-color: white;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 60px;
+}
+
+.categorie_button_icon {
+  border: #ff5733 2px solid;
+  border-radius: 100%;
+  color: #ff5733;
+  margin: auto;
+  padding: 5px;
+}
+
+.categorie_button_text {
+  color: gray;
+  font-size: smaller;
+  margin: auto;
+  padding: 5px;
+}
+
+.meal_cads {
+  display: grid;
+  grid-template-columns: 180px 180px;
+}
+
+.recipe_card {
+  margin-left: 30px;
+  margin-right: 30px;
+}
