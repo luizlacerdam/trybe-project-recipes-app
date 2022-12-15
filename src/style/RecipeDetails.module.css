@@ -1,40 +1,81 @@
-.details_image {
-  filter: saturate(60%);
+.box_recipe_detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.container_info {
   position: relative;
-  width: 360px;
+}
+
+.details_image {
+  border: 1px solid #ff5733;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  position: relative;
+  width: 100%;
 }
 
 .header_buttons {
+  align-items: center;
+  background-color: #f1f1f1;
+  border: 1px solid #ff5733;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: -360px;
-  position: relative;
+  height: 100px;
+  justify-content: center;
+  position: absolute;
+  transform: translateX(20%) translateY(-50%);
+  width: 70%;
 }
 
-
 .header_button {
-  background-color: rgba(0, 0, 0, 0);
   border: none;
-  margin: 0;
-  max-width: 50px;
+  font-size: 0.7rem;
+  width: 50px;
 }
 
 .header_button_image {
-
-  /* color: #fcc436; */
-  color: #2e0e5f;
+  color: #ff5733;
 }
 
 .details_title {
+  background-color: #ff5733;
+  border-radius: 8px;
   color: white;
   display: flex;
-  font-size: 50px;
+  font-size: 2rem;
   justify-content: center;
-  margin: 80px;
+  margin: -15px;
+  padding: 0 8px;
+  position: relative;
 }
 
-.share_favorite {
+.box_buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+}
+
+.container_list_ingredients {
+  margin-top: 75px;
+}
+
+.item_list {
+  list-style: none;
+}
+
+.item_list:before {
+  color: #ff5733;
+  content: '•';
+  padding-right: 10px;
+}
+
+.instructions {
+  padding: 0 10px;
+}
+
+.video_instructions {
+  align-self: center;
+  margin: 10px 0;
+  width: 90%;
 }
