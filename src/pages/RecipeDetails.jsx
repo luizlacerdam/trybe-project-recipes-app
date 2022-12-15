@@ -86,9 +86,9 @@ function RecipeDetails() {
               />
             </div>
             <div className={ style.header_buttons }>
-              <h3 className={ style.details_title } data-testid="recipe-title">
+              <h1 className={ style.details_title } data-testid="recipe-title">
                 { isMeal ? recipe.strMeal : recipe.strDrink }
-              </h3>
+              </h1>
               { isMeal && (
                 <p data-testid="recipe-category" className={ style.category_recipe }>
                   {recipe.strCategory}
