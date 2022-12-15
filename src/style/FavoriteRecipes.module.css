@@ -40,6 +40,14 @@
   width: 10rem;
 }
 
+.header_button_image {
+  color: #ff5733;
+}
+
+.buttons_conteiner {
+  display: flex;
+}
+
 .box_info_recipe_favorite {
   background-color: #f1f1f1;
   border-radius: 0 6px 6px 0;
@@ -70,3 +78,16 @@
   color: #ff5733;
 }
 
+.categorie_button {
+  background-color: white;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 60px;
+}
+
+.button_text {
+  margin: auto;
+  margin-top: 5px;
+}

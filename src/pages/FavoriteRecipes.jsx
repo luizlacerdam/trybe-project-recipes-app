@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-max-depth */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Header from '../components/Header';
 import {
   getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
 } from '../services/LocalStorage';
-// import shareIcon from '../images/shareIcon.svg';
-import likeAndDeslike from '../images/blackHeartIcon.svg';
 import style from '../style/FavoriteRecipes.module.css';
 import ShareButton from '../components/ShareButton';
+import Icon from '../components/Icon';
 
 // const copy = require('clipboard-copy');
 
@@ -59,25 +60,37 @@ function FavoriteRecipes() {
       <Header title="Favorite Recipes" searchButton={ false } />
       <div className={ style.container_buttons_filter }>
         <button
+          className={ style.categorie_button }
           data-testid="filter-by-all-btn"
           type="button"
           onClick={ () => setFavoriteRecipes(allFavoriteRecipes) }
         >
-          All
+          <Icon shape="AllMealsDrinks" />
+          <p className={ style.button_text }>
+            All
+          </p>
         </button>
         <button
+          className={ style.categorie_button }
           data-testid="filter-by-meal-btn"
           type="button"
           onClick={ handleFilterMeals }
         >
-          Meals
+          <Icon shape="AllMeals" />
+          <p className={ style.button_text }>
+            Meals
+          </p>
         </button>
         <button
+          className={ style.categorie_button }
           data-testid="filter-by-drink-btn"
           type="button"
           onClick={ handleFilterDrinks }
         >
-          Drinks
+          <Icon shape="AllDrinks" />
+          <p className={ style.button_text }>
+            Drinks
+          </p>
         </button>
       </div>
       <div className={ style.container_favorites }>
@@ -129,19 +142,17 @@ function FavoriteRecipes() {
                   />
                 </button>
                 <span data-testid="msgLinkCopied">{linkMsg}</span> */}
-                <div>
+                <div className={ style.buttons_conteiner }>
                   <ShareButton />
                   <button
                     type="button"
                     onClick={ handleDeslikeRecipe }
                     className={ style.btn_favorite }
                   >
-                    <img
-                      data-testid={ `${index}-horizontal-favorite-btn` }
-                      id={ favorite.id }
-                      src={ likeAndDeslike }
-                      alt="Icon like and deslike"
-                      className={ style.img_deslike }
+                    <FontAwesomeIcon
+                      className={ style.header_button_image }
+                      icon={ solid('heart') }
+                      size="3x"
                     />
                   </button>
 
