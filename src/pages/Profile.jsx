@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { actLogout as logoutAction } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import style from '../style/Profile.module.css';
 
 class Profile extends Component {
   state = {
@@ -40,32 +41,39 @@ class Profile extends Component {
   render() {
     const { email } = this.state;
     return (
-      <div>
+      <div className={ style.container_user }>
         <Header title="Profile" search={ false } />
-
-        <p data-testid="profile-email">{email}</p>
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ () => this.handleRedirect('/done-recipes') }
-        >
-          Done Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ () => this.handleRedirect('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ this.handleLogout }
-        >
-          Logout
-        </button>
-
+        <div className={ style.box_user }>
+          <p data-testid="profile-email" className={ style.user_email }>
+            {email}
+          </p>
+        </div>
+        <div className={ style.container_buttons }>
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            onClick={ () => this.handleRedirect('/done-recipes') }
+            className={ style.button_default }
+          >
+            Done Recipes
+          </button>
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+            onClick={ () => this.handleRedirect('/favorite-recipes') }
+            className={ style.button_default }
+          >
+            Favorite Recipes
+          </button>
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ this.handleLogout }
+            className={ style.button_default }
+          >
+            Logout
+          </button>
+        </div>
         <Footer />
       </div>
     );
