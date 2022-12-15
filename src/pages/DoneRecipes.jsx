@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 // import shareIcon from '../images/shareIcon.svg';
-import style from '../style/DoneRecipes.module.css';
 import ShareButton from '../components/ShareButton';
+import style from '../style/DoneRecipes.module.css';
+import Icon from '../components/Icon';
 
 function DoneRecipes() {
   // const [showMessage, setShowMessage] = useState(false);
@@ -37,29 +38,39 @@ function DoneRecipes() {
       <Header title="Done Recipes" searchButton={ false } />
       <div className={ style.container_buttons_filter }>
         <button
+          className={ style.categorie_button }
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => setRenderRecipes(getDoneRecipes) }
         >
-          All
-
+          <Icon shape="AllMealsDrinks" />
+          <p className={ style.button_text }>
+            All
+          </p>
         </button>
         <button
+          className={ style.categorie_button }
           type="button"
           data-testid="filter-by-meal-btn"
           onClick={ () => setRenderRecipes(getDoneRecipes
             .filter((recipe) => recipe.type === 'meal')) }
         >
-          Meals
-
+          <Icon shape="AllMeals" />
+          <p className={ style.button_text }>
+            Meals
+          </p>
         </button>
         <button
+          className={ style.categorie_button }
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => setRenderRecipes(getDoneRecipes
             .filter((recipe) => recipe.type === 'drink')) }
         >
-          Drinks
+          <Icon shape="AllDrinks" />
+          <p className={ style.button_text }>
+            Drinks
+          </p>
         </button>
       </div>
       {renderRecipes && renderRecipes.map((recipe, index) => {

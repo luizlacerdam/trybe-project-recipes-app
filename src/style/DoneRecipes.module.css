@@ -71,3 +71,18 @@
   font-size: 0.8rem;
   padding: 3px;
 }
+
+.categorie_button {
+  background-color: white;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 60px;
+}
+
+.button_text {
+  color: gray;
+  margin: auto;
+  margin-top: 5px;
+}

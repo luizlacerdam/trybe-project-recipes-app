@@ -3,7 +3,7 @@ import React from 'react';
 import {
   GiChickenOven, GiGoat, GiKnifeFork, GiPieSlice, GiSteak, GiCoffeeCup,
 } from 'react-icons/gi';
-import { MdOutlineFreeBreakfast } from 'react-icons/md';
+import { MdOutlineFreeBreakfast, MdFastfood } from 'react-icons/md';
 import { FaGlassMartiniAlt, FaWineGlassAlt, FaCocktail } from 'react-icons/fa';
 import { BsCupStraw } from 'react-icons/bs';
 import { IoIosBeer } from 'react-icons/io';
@@ -69,6 +69,11 @@ function Icon({ shape }) {
   if (shape === 'AllDrinks') {
     return (
       <FaGlassMartiniAlt size="30px" className={ style.categorie_button_icon } />
+    );
+  }
+  if (shape === 'AllMealsDrinks') {
+    return (
+      <MdFastfood size="30px" className={ style.categorie_button_icon } />
     );
   }
 }
