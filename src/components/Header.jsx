@@ -2,7 +2,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../images/headerLogo.png';
 import style from '../style/Meals.module.css';
 import SearchBar from './SearchBar';
@@ -24,11 +24,13 @@ function Header(props) {
     <div className={ style.header }>
       <div className={ style.up_header }>
         <div className={ style.header_button }>
-          <img
-            className={ style.header_icon }
-            src={ logo }
-            alt="header-logo"
-          />
+          <Link to="/meals">
+            <img
+              className={ style.header_icon }
+              src={ logo }
+              alt="header-logo"
+            />
+          </Link>
           <h1 className={ style.app_name }>Recipes app</h1>
         </div>
         <div className={ style.header_buttons }>
