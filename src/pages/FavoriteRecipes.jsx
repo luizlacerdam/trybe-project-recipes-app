@@ -1,17 +1,19 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import {
   getFavoriteRecipeLocalStorage, saveFavoriteRecipesLocalStorage,
 } from '../services/LocalStorage';
-import shareIcon from '../images/shareIcon.svg';
+// import shareIcon from '../images/shareIcon.svg';
 import likeAndDeslike from '../images/blackHeartIcon.svg';
 import style from '../style/FavoriteRecipes.module.css';
+import ShareButton from '../components/ShareButton';
 
-const copy = require('clipboard-copy');
+// const copy = require('clipboard-copy');
 
 function FavoriteRecipes() {
-  const [linkMsg, setLinkMsg] = useState('');
+  // const [linkMsg, setLinkMsg] = useState('');
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [allFavoriteRecipes, setAllFavoriteRecipes] = useState([]);
   const [controller, setController] = useState(false);
@@ -22,15 +24,15 @@ function FavoriteRecipes() {
     setAllFavoriteRecipes(newFavoriteRecipes);
   }, [controller]);
 
-  const handleClickShared = ({ target }) => {
-    const { name, id } = target;
-    setLinkMsg('Link copied!');
-    if (name.includes('meal')) {
-      copy(`http://localhost:3000/meals/${id}`);
-    } else {
-      copy(`http://localhost:3000/drinks/${id}`);
-    }
-  };
+  // const handleClickShared = ({ target }) => {
+  //   const { name, id } = target;
+  //   setLinkMsg('Link copied!');
+  //   if (name.includes('meal')) {
+  //     copy(`http://localhost:3000/meals/${id}`);
+  //   } else {
+  //     copy(`http://localhost:3000/drinks/${id}`);
+  //   }
+  // };
 
   const handleDeslikeRecipe = ({ target }) => {
     const { id } = target;
@@ -53,10 +55,9 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <div className={ style.favorite_recipe_card }>
       <Header title="Favorite Recipes" searchButton={ false } />
-      <p>Favorite Recipes</p>
-      <div>
+      <div className={ style.container_buttons_filter }>
         <button
           data-testid="filter-by-all-btn"
           type="button"
@@ -79,14 +80,15 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      <div>
+      <div className={ style.container_favorites }>
         {favoriteRecipes && favoriteRecipes.map((favorite, index) => (
           <div key={ index }>
-            <div>
+            <div className={ style.box_favorites }>
               <Link
                 to={ favorite.type === 'meal'
                   ? `/meals/${favorite.id}`
                   : `/drinks/${favorite.id}` }
+                className={ style.link_thumb }
               >
                 <img
                   data-testid={ `${index}-horizontal-image` }
@@ -95,42 +97,56 @@ function FavoriteRecipes() {
                   className={ style.thumb }
                 />
               </Link>
-              <Link
-                to={ favorite.type === 'meal'
-                  ? `/meals/${favorite.id}`
-                  : `/drinks/${favorite.id}` }
-              >
-                <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
-              </Link>
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                { favorite.type === 'meal'
-                  ? `${favorite.nationality} - ${favorite.category}`
-                  : favorite.alcoholicOrNot}
-              </p>
-              <button
-                type="button"
-                onClick={ handleClickShared }
-              >
-                <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  name={ `${favorite.name}-${favorite.type}` }
-                  id={ favorite.id }
-                  src={ shareIcon }
-                  alt="Icon share"
-                />
-              </button>
-              <span data-testid="msgLinkCopied">{linkMsg}</span>
-              <button
-                type="button"
-                onClick={ handleDeslikeRecipe }
-              >
-                <img
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  id={ favorite.id }
-                  src={ likeAndDeslike }
-                  alt="Icon like and deslike"
-                />
-              </button>
+              <div className={ style.box_info_recipe_favorite }>
+                <Link
+                  to={ favorite.type === 'meal'
+                    ? `/meals/${favorite.id}`
+                    : `/drinks/${favorite.id}` }
+                >
+                  <p data-testid={ `${index}-horizontal-name` } className={ style.title }>
+                    {favorite.name}
+                  </p>
+                </Link>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                  className={ style.type_nationality }
+                >
+                  { favorite.type === 'meal'
+                    ? `${favorite.nationality} - ${favorite.category}`
+                    : favorite.alcoholicOrNot}
+                </p>
+
+                {/* <button
+                  type="button"
+                  onClick={ handleClickShared }
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    name={ `${favorite.name}-${favorite.type}` }
+                    id={ favorite.id }
+                    src={ shareIcon }
+                    alt="Icon share"
+                  />
+                </button>
+                <span data-testid="msgLinkCopied">{linkMsg}</span> */}
+                <div>
+                  <ShareButton />
+                  <button
+                    type="button"
+                    onClick={ handleDeslikeRecipe }
+                    className={ style.btn_favorite }
+                  >
+                    <img
+                      data-testid={ `${index}-horizontal-favorite-btn` }
+                      id={ favorite.id }
+                      src={ likeAndDeslike }
+                      alt="Icon like and deslike"
+                      className={ style.img_deslike }
+                    />
+                  </button>
+
+                </div>
+              </div>
             </div>
           </div>
         ))}

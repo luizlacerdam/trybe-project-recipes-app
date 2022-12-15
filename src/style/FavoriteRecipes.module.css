@@ -1,3 +1,72 @@
-.thumb {
-  height: 300px;
+.favorite_recipe_card {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
+
+.container_buttons_filter {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container_favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+}
+
+.box_favorites {
+  border: 1px solid #ff5733;
+  border-radius: 6px;
+  display: flex;
+  width: 100%;
+}
+
+.link_thumb {
+  height: 11rem;
+  width: 10rem;
+}
+
+.thumb {
+  border-radius: 6px 0 0 6px;
+  height: 11rem;
+  width: 10rem;
+}
+
+.box_info_recipe_favorite {
+  background-color: #f1f1f1;
+  border-radius: 0 6px 6px 0;
+  height: 11rem;
+  padding-left: 8px;
+  width: 100%;
+}
+
+.title {
+  color: #ff5733;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.type_nationality {
+  font-size: 0.8rem;
+  margin-top: -1px;
+}
+
+.btn_favorite {
+  background-color: #f1f1f1;
+  border: none;
+}
+
+.img_deslike {
+  background-color: #f1f1f1;
+  color: #ff5733;
+}
+
