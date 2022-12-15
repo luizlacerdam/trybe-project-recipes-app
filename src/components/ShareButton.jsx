@@ -23,7 +23,7 @@ function ShareButton() {
     }
   };
   return (
-    <div>
+    <div className={ style.box_btn_shared }>
       <button
         data-testid="share-btn"
         type="button"
@@ -36,7 +36,7 @@ function ShareButton() {
           size="3x"
         />
       </button>
-      <div>{linkMsg}</div>
+      <div className={ style.msg_shared }>{linkMsg}</div>
     </div>
   );
 }

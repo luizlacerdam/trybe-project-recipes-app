@@ -75,40 +75,58 @@ function RecipeDetails() {
   return (
     <div className={ style.recipe_details }>
       { recipeDetail.map((recipe, index) => (
-        <div key={ index }>
-          <div>
-            <img
-              data-testid="recipe-photo"
-              src={ isMeal ? recipe.strMealThumb : recipe.strDrinkThumb }
-              alt={ isMeal ? recipe.strMeal : recipe.strDrink }
-              className={ style.details_image }
-            />
-          </div>
-          <div className={ style.header_buttons }>
-            <div className={ style.share_favorite }>
-              <ShareButton />
-              <FavoriteButton recipeProp={ handleRecipeProp() } />
+        <div key={ index } className={ style.box_recipe_detail }>
+          <div className={ style.container_info }>
+            <div>
+              <img
+                data-testid="recipe-photo"
+                src={ isMeal ? recipe.strMealThumb : recipe.strDrinkThumb }
+                alt={ isMeal ? recipe.strMeal : recipe.strDrink }
+                className={ style.details_image }
+              />
             </div>
-            <h3 className={ style.details_title } data-testid="recipe-title">
-              { isMeal ? recipe.strMeal : recipe.strDrink }
-            </h3>
+            <div className={ style.header_buttons }>
+              <h3 className={ style.details_title } data-testid="recipe-title">
+                { isMeal ? recipe.strMeal : recipe.strDrink }
+              </h3>
+              { isMeal && (
+                <p data-testid="recipe-category" className={ style.category_recipe }>
+                  {recipe.strCategory}
+                </p>
+              ) }
+              { !isMeal && (
+                <p data-testid="recipe-category" className={ style.category_recipe }>
+                  {recipe.strAlcoholic}
+                </p>
+              ) }
+              <div className={ style.box_buttons }>
+                <ShareButton />
+                <FavoriteButton recipeProp={ handleRecipeProp() } />
+              </div>
+            </div>
           </div>
-          { isMeal && <p data-testid="recipe-category">{recipe.strCategory}</p> }
-          { !isMeal && <p data-testid="recipe-category">{recipe.strAlcoholic}</p> }
-          { ingredientsList.map((ingredient, idx) => (
-            <ul key={ idx }>
-              <li data-testid={ `${idx}-ingredient-name-and-measure` }>
-                {`${ingredient} - ${measureList[idx]}`}
-              </li>
-            </ul>
-          ))}
-          <p data-testid="instructions">{recipe.strInstructions}</p>
+          <div className={ style.container_list_ingredients }>
+            { ingredientsList.map((ingredient, idx) => (
+              <ul key={ idx }>
+                <li
+                  data-testid={ `${idx}-ingredient-name-and-measure` }
+                  className={ style.item_list }
+                >
+                  {`${ingredient} - ${measureList[idx]}`}
+                </li>
+              </ul>
+            ))}
+          </div>
+          <p data-testid="instructions" className={ style.instructions }>
+            {recipe.strInstructions}
+          </p>
           { isMeal && <iframe
             data-testid="video"
             width="560"
             height="315"
             title="video-recipe"
             src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=').pop()}` }
+            className={ style.video_instructions }
           /> }
         </div>
       )) }

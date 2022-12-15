@@ -1,17 +1,35 @@
 .container_carousel {
-  border: 1px red solid;
+  background-color: rgba(255, 87, 51, 0.2);
+  border-radius: 8px;
   display: flex;
+  height: 250px;
+  margin: 10px 7px 30px;
   overflow-x: auto;
-  padding: 0 10px;
+  padding: 10px;
+  width: 91%;
 }
 
 .box_carousel {
-  border: 1px blue solid;
-  height: 300px;
-  width: 300px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.box_item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Thumb {
+  border: 1px solid #ff5733;
+  border-radius: 8px;
   height: 180px;
-  width: 180px;
+  margin: 5px;
+  width: 150px;
+}
+
+.title_item {
+  color: #ff5733;
 }

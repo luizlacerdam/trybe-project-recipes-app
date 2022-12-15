@@ -37,13 +37,16 @@ function CarouselRecommendations() {
           key={ index }
           className={ style.box_carousel }
         >
-          <div className={ style.item }>
+          <div className={ style.box_item }>
             <img
               src={ isMeal ? item.strDrinkThumb : item.strMealThumb }
               alt={ isMeal ? item.strDrink : item.strMeal }
               className={ style.Thumb }
             />
-            <p data-testid={ `${index}-recommendation-title` }>
+            <p
+              data-testid={ `${index}-recommendation-title` }
+              className={ style.title_item }
+            >
               { isMeal ? item.strDrink : item.strMeal }
             </p>
           </div>
