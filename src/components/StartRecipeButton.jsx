@@ -39,7 +39,7 @@ function StartRecipeButton() {
   };
 
   useEffect(() => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const inProgressRecipes = JSON.parse(localStorage.getItem(id));
     if (inProgressRecipes !== null && inProgressRecipes !== undefined) {
       setRecipeInProgress(true);
     }

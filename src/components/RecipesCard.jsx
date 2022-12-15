@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react';
+// import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import style from '../style/Meals.module.css';
 
 function RecipesCard({ recipe, index, page }) {
+  const history = useHistory();
   const imgThumbVerify = () => {
     let imgThumb;
     if (page === '/meals') {
@@ -34,12 +37,14 @@ function RecipesCard({ recipe, index, page }) {
   };
 
   return (
-    <Link
-      to={ `${page}/${recipe[idVerify()]}` }
+    <button
+      type="button"
+      onClick={ () => history.push(`${page}/${recipe[idVerify()]}`) }
+      className={ style.recipe_card }
     >
       <div
         data-testid={ `${index}-recipe-card` }
-        className={ style.recipe_card }
+        className={ style.recipe_conteiner }
       >
         <img
           data-testid={ `${index}-card-img` }
@@ -47,13 +52,14 @@ function RecipesCard({ recipe, index, page }) {
           alt={ recipe[nameStrVerify()] }
           className={ style.recipe_image }
         />
-        <div
+        <h3
           data-testid={ `${index}-card-name` }
+          className={ style.recipe_text }
         >
           {recipe[nameStrVerify()]}
-        </div>
+        </h3>
       </div>
-    </Link>
+    </button>
   );
 }
 

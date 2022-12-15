@@ -1,29 +1,16 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
-import '../style/Footer.css';
+import { Link } from 'react-router-dom';
+import Icon from './Icon';
+import style from '../style/Meals.module.css';
 
 function Footer() {
   return (
-    <footer data-testid="footer">
+    <footer className={ style.footer } data-testid="footer">
       <Link to="/drinks">
-        <button type="button">
-          <img
-            alt="drinks-bottom"
-            src={ drinkIcon }
-            data-testid="drinks-bottom-btn"
-          />
-        </button>
+        <Icon shape="AllDrinks" />
       </Link>
       <Link to="/meals">
-        <button type="button">
-          <img
-            alt="drinks-bottom"
-            src={ mealIcon }
-            data-testid="meals-bottom-btn"
-          />
-        </button>
+        <Icon shape="AllMeals" />
       </Link>
     </footer>
   );

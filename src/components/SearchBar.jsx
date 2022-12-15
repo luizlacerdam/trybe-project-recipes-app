@@ -78,6 +78,7 @@ function SearchBar() {
   return (
     <div className={ style.search_bar }>
       <input
+        placeholder="Search"
         data-testid="search-input"
         onChange={
           ({ target: { value } }) => { setApiRequest({ ...apiRequest, search: value }); }
@@ -89,6 +90,7 @@ function SearchBar() {
       <div className={ style.search_type }>
         <label htmlFor="ingredient">
           <input
+            className={ style.search_radio }
             value="i"
             data-testid="ingredient-search-radio"
             type="radio"
@@ -100,6 +102,7 @@ function SearchBar() {
         </label>
         <label htmlFor="name">
           <input
+            className={ style.search_radio }
             value="s"
             onClick={ handleRadio }
             name="radio"
@@ -111,6 +114,7 @@ function SearchBar() {
         </label>
         <label htmlFor="first-letter">
           <input
+            className={ style.search_radio }
             value="f"
             name="radio"
             data-testid="first-letter-search-radio"
