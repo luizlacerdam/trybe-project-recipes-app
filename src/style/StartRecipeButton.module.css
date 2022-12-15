@@ -1,0 +1,22 @@
+.container_button_start {
+  align-items: center;
+  display: flex;
+  height: 10px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.button_start_recipe {
+  background-color: #ff5733;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.icon_btn_start {
+  margin-right: 5px;
+}
