@@ -14,7 +14,7 @@
 - Escrever testes para garantir que sua aplicação possua uma boa cobertura de testes.
 
 ## Veja o resultado a seguir do projeto pronto:
-  ![exemplo do Pixel Art](./recipeap.gif)
+  ![exemplo do Pixel Art](./recipesap.gif)
 
 ## Requisitos Obrigatorios:
 
